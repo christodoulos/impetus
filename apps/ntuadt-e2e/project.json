@@ -1,0 +1,28 @@
+{
+  "root": "apps/ntuadt-e2e",
+  "sourceRoot": "apps/ntuadt-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/ntuadt-e2e/cypress.json",
+        "devServerTarget": "ntuadt:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "ntuadt:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ntuadt-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["ntuadt"]
+}
