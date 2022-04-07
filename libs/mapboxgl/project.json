@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/mapboxgl",
+  "sourceRoot": "libs/mapboxgl/src",
+  "prefix": "impetus",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/mapboxgl"],
+      "options": {
+        "project": "libs/mapboxgl/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/mapboxgl/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/mapboxgl/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/mapboxgl"],
+      "options": {
+        "jestConfig": "libs/mapboxgl/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/mapboxgl/src/**/*.ts",
+          "libs/mapboxgl/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

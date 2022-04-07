@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@impetus/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@impetus/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@impetus/mapboxgl": ["libs/mapboxgl/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
