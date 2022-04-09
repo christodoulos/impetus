@@ -1,14 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
 @import '~mapbox-gl/dist/mapbox-gl.css';
-/* @import '~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css'; */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-body {
-  margin: 0;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
