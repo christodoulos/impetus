@@ -22,28 +22,25 @@ export class MapComponent
     Omit<mapboxgl.MapboxOptions, 'bearing' | 'container' | 'pitch' | 'zoom'>
 {
   @ViewChild('map', { static: true }) mapContainer!: ElementRef;
-  @Input() accessToken?: mapboxgl.MapboxOptions['accessToken'];
 
-  // Dynamic? inputs
+  // MapboxGL inputs
   @Input() style: mapboxgl.MapboxOptions['style'];
   @Input() center?: mapboxgl.MapboxOptions['center'];
-  @Input() zoom?: [number];
-  @Input() bearing?: [number];
-  @Input() pitch?: [number];
+  @Input() zoom?: number;
+  @Input() bearing?: number;
+  @Input() pitch?: number;
 
   constructor(private mapService: MapService) {}
 
   ngAfterViewInit(): void {
     this.mapService.setup({
-      accessToken: this.accessToken,
-      mapOptions: {
-        container: this.mapContainer.nativeElement,
-        style: this.style,
-        center: this.center,
-        zoom: this.zoom,
-        bearing: this.bearing,
-        pitch: this.pitch,
-      },
+      container: this.mapContainer.nativeElement,
+      style: this.style,
+      center: this.center,
+      zoom: this.zoom,
+      bearing: this.bearing,
+      pitch: this.pitch,
+
       // mapEvents: this.
     });
   }
