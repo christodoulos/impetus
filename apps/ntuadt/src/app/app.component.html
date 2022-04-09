@@ -1,24 +1,22 @@
-<!-- <div class="grid place-items-center h-screen">
-  <div class="text-xl font-bold underline">
-    Welcome to my first Angular application!
-    <impetus-map
-      accessToken="pk.eyJ1IjoiY2hyaXN0b2RvdWxvcyIsImEiOiJja3luYTd3eW0ydGFiMm9xcHRmMGJyOHVrIn0.c1mSurunkjU4Wyf2hxcy0g"
-    ></impetus-map>
-  </div>
-</div> -->
-
-<!-- <div>Message: {{ hello$ | async | json }}</div> -->
-
 <div class="flex flex-col h-screen space-y-2">
-  <div class="bg-indigo-400 p-4">NTUA Digital Twin</div>
+  <div class="bg-indigo-400 p-4 text-white font-semibold">
+    NTUA Digital Twin
+  </div>
   <div class="bg-gray-300 flex flex-row items-center p-4 space-x-4">
     <span class="cursor-pointer">NTUA Map</span>
     <span class="cursor-pointer">Itia station</span>
   </div>
-  <div class="flex flex-row h-1/2">
-    <div class="w-1/2">Side menu</div>
+  <div class="flex flex-row h-full">
+    <div class="w-1/4">Side menu</div>
     <div class="flex flex-grow">
-      <impetus-map class="w-full"></impetus-map>
+      <impetus-map
+        class="w-full"
+        [style]="'mapbox://styles/mapbox/light-v9'"
+        [center]="[23.782529708901464, 37.97732290332949]"
+        [zoom]="[16]"
+        [pitch]="[45]"
+        [bearing]="[-17.6]"
+      ></impetus-map>
     </div>
   </div>
 </div>

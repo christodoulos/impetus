@@ -14,7 +14,10 @@ export const MAPBOX_API_KEY = new InjectionToken('MapboxApiKey');
 export interface SetupMap {
   accessToken?: string;
   customMapboxApiUrl?: string;
-  mapOptions: Omit<MapboxGl.MapboxOptions, 'bearing' | 'pitch' | 'zoom'> & {
+  mapOptions: Omit<
+    MapboxGl.MapboxOptions,
+    'accessToken' | 'bearing' | 'pitch' | 'zoom'
+  > & {
     bearing?: [number];
     pitch?: [number];
     zoom?: [number];
@@ -57,7 +60,6 @@ export class MapService {
 
   private assign(obj: any, prop: any, value: any) {
     if (typeof prop === 'string') {
-      // tslint:disable-next-line:no-parameter-reassignment
       prop = prop.split('.');
     }
     if (prop.length > 1) {

@@ -23,6 +23,10 @@ export class MapComponent
 {
   @ViewChild('map', { static: true }) mapContainer!: ElementRef;
   @Input() accessToken?: mapboxgl.MapboxOptions['accessToken'];
+
+  // Dynamic? inputs
+  @Input() style: mapboxgl.MapboxOptions['style'];
+  @Input() center?: mapboxgl.MapboxOptions['center'];
   @Input() zoom?: [number];
   @Input() bearing?: [number];
   @Input() pitch?: [number];
@@ -34,9 +38,11 @@ export class MapComponent
       accessToken: this.accessToken,
       mapOptions: {
         container: this.mapContainer.nativeElement,
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [23.782529708901464, 37.97732290332949],
-        zoom: [16],
+        style: this.style,
+        center: this.center,
+        zoom: this.zoom,
+        bearing: this.bearing,
+        pitch: this.pitch,
       },
       // mapEvents: this.
     });
