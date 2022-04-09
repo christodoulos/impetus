@@ -1,4 +1,10 @@
-import { Injectable, InjectionToken, NgZone } from '@angular/core';
+import {
+  Inject,
+  Injectable,
+  InjectionToken,
+  NgZone,
+  Optional,
+} from '@angular/core';
 import * as MapboxGl from 'mapbox-gl';
 import { first } from 'rxjs';
 import { MapEvent } from './map.types';
@@ -21,11 +27,19 @@ export interface SetupMap {
 })
 export class MapService {
   mapInstance!: MapboxGl.Map;
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    @Optional() @Inject(MAPBOX_API_KEY) private readonly MAPBOX_API_KEY: string
+  ) {}
 
   setup(options: SetupMap) {
+    console.log('setup', options);
     this.ngZone.onStable.pipe(first()).subscribe(() => {
-      this.assign(MapboxGl, 'accessToken', options.accessToken);
+      this.assign(
+        MapboxGl,
+        'accessToken',
+        options.accessToken || this.MAPBOX_API_KEY
+      );
       this.createMap(options.mapOptions as MapboxGl.MapboxOptions);
     });
   }

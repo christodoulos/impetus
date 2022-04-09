@@ -13,11 +13,14 @@ import { MapEvent } from './map.types';
 @Component({
   selector: 'impetus-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css'],
   providers: [MapService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent
+  implements
+    AfterViewInit,
+    Omit<mapboxgl.MapboxOptions, 'bearing' | 'container' | 'pitch' | 'zoom'>
+{
   @ViewChild('map', { static: true }) mapContainer!: ElementRef;
   @Input() accessToken?: mapboxgl.MapboxOptions['accessToken'];
   @Input() zoom?: [number];
@@ -32,8 +35,8 @@ export class MapComponent implements AfterViewInit {
       mapOptions: {
         container: this.mapContainer.nativeElement,
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: [9], // starting zoom
+        center: [23.782529708901464, 37.97732290332949],
+        zoom: [16],
       },
       // mapEvents: this.
     });
