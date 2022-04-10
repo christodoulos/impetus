@@ -1,7 +1,7 @@
 import { Inject, Injectable, InjectionToken, NgZone } from '@angular/core';
 import * as MapboxGl from 'mapbox-gl';
-import { first } from 'rxjs';
-import { MapEvent } from './map.types';
+import { AsyncSubject, first, Observable } from 'rxjs';
+import { MapEvents } from './map.interfaces';
 
 export const MAPBOX_API_KEY = new InjectionToken('MapboxApiKey');
 
@@ -9,21 +9,46 @@ export const MAPBOX_API_KEY = new InjectionToken('MapboxApiKey');
   providedIn: 'root',
 })
 export class MapService {
-  mapInstance!: MapboxGl.Map;
+  // public
+  mapInstance: MapboxGl.Map | undefined;
+  mapCreated$: Observable<void> | undefined;
+  mapLoaded$: Observable<void> | undefined;
+  mapEvents: MapEvents | undefined;
+  //private
+  private mapCreated = new AsyncSubject<void>();
+  private mapLoaded = new AsyncSubject<void>();
+
   constructor(
     private ngZone: NgZone,
     @Inject(MAPBOX_API_KEY) private readonly MAPBOX_API_KEY: string
-  ) {}
+  ) {
+    this.mapCreated$ = this.mapCreated.asObservable();
+    this.mapLoaded$ = this.mapLoaded.asObservable();
+  }
 
-  setup(options: MapboxGl.MapboxOptions) {
+  setup(options: MapboxGl.MapboxOptions, events: MapEvents) {
     this.ngZone.onStable.pipe(first()).subscribe(() => {
       options.accessToken = this.MAPBOX_API_KEY;
       this.createMap(options);
+      this.hookEvents(events);
+      this.mapEvents = events;
+      this.mapCreated.next();
+      this.mapCreated.complete();
     });
   }
 
   private createMap(options: MapboxGl.MapboxOptions) {
     NgZone.assertNotInAngularZone();
     this.mapInstance = new MapboxGl.Map(options);
+  }
+
+  private hookEvents(events: MapEvents) {
+    this.mapInstance?.on('load', (event) => {
+      this.mapLoaded.next();
+      this.mapLoaded.complete();
+      this.ngZone.run(() => {
+        events.mapLoad.emit(event.target);
+      });
+    });
   }
 }
