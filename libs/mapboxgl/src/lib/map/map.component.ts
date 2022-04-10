@@ -13,7 +13,8 @@ import { MapService } from './map.service';
 import { MapEvents } from './map.interfaces';
 
 @Component({
-  selector: 'impetus-map',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'mapboxgl-map',
   templateUrl: './map.component.html',
   providers: [MapService],
   changeDetection: ChangeDetectionStrategy.OnPush,

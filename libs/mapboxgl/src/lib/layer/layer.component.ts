@@ -12,7 +12,8 @@ import { MapService } from '../map/map.service';
 import { LayerSetup, LayerEvents } from './layer.interface';
 
 @Component({
-  selector: 'impetus-layer',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'mapboxgl-layer',
   template: '',
 })
 export class LayerComponent implements OnInit {

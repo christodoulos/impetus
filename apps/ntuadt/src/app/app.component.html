@@ -9,7 +9,7 @@
   <div class="flex flex-row h-full">
     <div class="w-1/4">Side menu</div>
     <div class="flex flex-grow">
-      <impetus-map
+      <mapboxgl-map
         class="w-full"
         [style]="'mapbox://styles/mapbox/light-v9'"
         [center]="[23.782529708901464, 37.97732290332949]"
@@ -18,7 +18,7 @@
         [bearing]="-17.6"
         (mapLoad)="onMapLoad($event)"
       >
-        <impetus-layer
+        <mapboxgl-layer
           id="route"
           type="line"
           [source]="{
@@ -124,8 +124,8 @@
             'line-color': '#888',
             'line-width': 8
           }"
-        ></impetus-layer>
-      </impetus-map>
+        ></mapboxgl-layer>
+      </mapboxgl-map>
     </div>
   </div>
 </div>
