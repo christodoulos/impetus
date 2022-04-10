@@ -1,6 +1,7 @@
 import { Inject, Injectable, InjectionToken, NgZone } from '@angular/core';
 import * as MapboxGl from 'mapbox-gl';
 import { AsyncSubject, first, Observable } from 'rxjs';
+import { LayerSetup } from '../layer/layer.interface';
 import { MapEvents } from './map.interfaces';
 
 export const MAPBOX_API_KEY = new InjectionToken('MapboxApiKey');
@@ -34,6 +35,16 @@ export class MapService {
       this.mapEvents = events;
       this.mapCreated.next();
       this.mapCreated.complete();
+    });
+  }
+
+  addLayer(layer: LayerSetup, bindEvents: boolean, before?: string) {
+    console.log('AAAAAAAAAAAAAAAA', layer);
+    this.ngZone.runOutsideAngular(() => {
+      this.mapInstance?.addLayer(layer.options as MapboxGl.AnyLayer, before);
+      if (bindEvents) {
+        console.log('BindEvents', bindEvents);
+      }
     });
   }
 
