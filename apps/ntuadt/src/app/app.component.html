@@ -11,13 +11,44 @@
     <div class="flex flex-grow">
       <mapboxgl-map
         class="w-full"
-        [style]="'mapbox://styles/mapbox/light-v9'"
+        [style]="'mapbox://styles/christodoulos/ckzichi5q001l15p1wpq6sbvs'"
         [center]="[23.782529708901464, 37.97732290332949]"
         [zoom]="16"
         [pitch]="45"
         [bearing]="-17.6"
         (mapLoad)="onMapLoad($event)"
       >
+        <mapboxgl-layer
+          id="3d-buildings"
+          source="composite"
+          sourceLayer="building"
+          [filter]="['==', 'extrude', 'true']"
+          type="fill-extrusion"
+          [minzoom]="15"
+          [paint]="{
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              15,
+              0,
+              15.05,
+              ['get', 'height']
+            ],
+            'fill-extrusion-base': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              15,
+              0,
+              15.05,
+              ['get', 'min_height']
+            ],
+            'fill-extrusion-opacity': 0.6
+          }"
+          [before]="labelLayerId"
+        ></mapboxgl-layer>
         <mapboxgl-layer
           id="route"
           type="line"

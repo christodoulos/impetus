@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import {
   filter,
@@ -16,7 +23,7 @@ import { LayerSetup, LayerEvents } from './layer.interface';
   selector: 'mapboxgl-layer',
   template: '',
 })
-export class LayerComponent implements OnInit {
+export class LayerComponent implements OnInit, OnDestroy, OnChanges {
   /* Init inputs */
   @Input() id!: mapboxgl.AnyLayer['id'];
   @Input() source?: mapboxgl.Layer['source'];
@@ -40,6 +47,7 @@ export class LayerComponent implements OnInit {
   ngOnInit(): void {
     console.log('layer init');
     if (this.mapService.mapLoaded$)
+      // TODO: Understand what exactly is going on here
       this.subscription = this.mapService.mapLoaded$
         .pipe(
           switchMap(() =>
@@ -56,6 +64,46 @@ export class LayerComponent implements OnInit {
         .subscribe((bindEvents: boolean) => this.init(bindEvents));
   }
 
+  ngOnDestroy(): void {
+    if (this.layerAdded) {
+      this.mapService.removeLayer(this.id);
+    }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if (!this.layerAdded) {
+      return;
+    }
+    if (changes['paint'] && !changes['paint'].isFirstChange()) {
+      this.mapService.setAllLayerPaintProperty(
+        this.id,
+        changes['paint'].currentValue
+      );
+    }
+    if (changes['layout'] && !changes['layout'].isFirstChange()) {
+      this.mapService.setAllLayerLayoutProperty(
+        this.id,
+        changes['layout'].currentValue
+      );
+    }
+    if (changes['filter'] && !changes['filter'].isFirstChange()) {
+      this.mapService.setLayerFilter(this.id, changes['filter'].currentValue);
+    }
+    if (changes['before'] && !changes['before'].isFirstChange()) {
+      this.mapService.setLayerBefore(this.id, changes['before'].currentValue);
+    }
+    if (
+      (changes['minzoom'] && !changes['minzoom'].isFirstChange()) ||
+      (changes['maxzoom'] && !changes['maxzoom'].isFirstChange())
+    ) {
+      this.mapService.setLayerZoomRange(this.id, this.minzoom, this.maxzoom);
+    }
+  }
+
   private init(bindEvents: boolean) {
     const layer: LayerSetup = {
       options: {
@@ -63,10 +111,10 @@ export class LayerComponent implements OnInit {
         type: this.type,
         metadata: this.metadata,
         source: this.source,
-        // 'source-layer': this.sourceLayer,
-        // minzoom: this.minzoom,
-        // maxzoom: this.maxzoom,
-        // filter: this.filter,
+        'source-layer': this.sourceLayer,
+        minzoom: this.minzoom,
+        maxzoom: this.maxzoom,
+        filter: this.filter,
         layout: this.layout,
         paint: this.paint,
       },
