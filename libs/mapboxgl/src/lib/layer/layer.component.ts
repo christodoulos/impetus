@@ -16,7 +16,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { MapService } from '../map/map.service';
-import { LayerSetup, LayerEvents } from './layer.interface';
+import { LayerSetup } from './layer.interface';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

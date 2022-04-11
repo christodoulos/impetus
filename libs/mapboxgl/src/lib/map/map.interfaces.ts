@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { EventData, Map, MapboxEvent } from 'mapbox-gl';
+import { Map } from 'mapbox-gl';
 
 export interface MapEvents {
   mapLoad: EventEmitter<Map>;

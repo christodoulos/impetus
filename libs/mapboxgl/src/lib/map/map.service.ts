@@ -100,7 +100,7 @@ export class MapService {
     return this.ngZone.runOutsideAngular(() => {
       Object.keys(paint).forEach((key) => {
         // TODO Check for perf, setPaintProperty only on changed paint props maybe
-        this.mapInstance?.setPaintProperty(layerId, key, (<any>paint)[key]);
+        this.mapInstance?.setPaintProperty(layerId, key, (<never>paint)[key]);
       });
     });
   }
@@ -119,12 +119,12 @@ export class MapService {
     return this.ngZone.runOutsideAngular(() => {
       Object.keys(layout).forEach((key) => {
         // TODO Check for perf, setPaintProperty only on changed paint props maybe
-        this.mapInstance?.setLayoutProperty(layerId, key, (<any>layout)[key]);
+        this.mapInstance?.setLayoutProperty(layerId, key, (<never>layout)[key]);
       });
     });
   }
 
-  setLayerFilter(layerId: string, filter: any[]) {
+  setLayerFilter(layerId: string, filter: never[]) {
     return this.ngZone.runOutsideAngular(() => {
       this.mapInstance?.setFilter(layerId, filter);
     });
