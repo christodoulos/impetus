@@ -5,6 +5,7 @@
     "api-interfaces": "libs/api-interfaces",
     "mapboxgl": "libs/mapboxgl",
     "ntuadt": "apps/ntuadt",
-    "ntuadt-e2e": "apps/ntuadt-e2e"
+    "ntuadt-e2e": "apps/ntuadt-e2e",
+    "ui": "libs/ui"
   }
 }
