@@ -10,28 +10,21 @@
     <span class="cursor-pointer" (click)="logout()">Logout</span>
   </div>
   <div class="flex flex-row h-full">
-    <div class="w-1/2">
+    <div class="w-1/3">
       <form-sign-in
         *ngIf="(isAuthenticated$ | async) === false"
         (credentials)="onCredentials($event)"
       ></form-sign-in>
-      <div *ngIf="isAuthenticated()" class="p-4 space-y-2 text-xs">
+      <div *ngIf="isAuthenticated$ | async" class="p-4 space-y-2 text-xs">
         <table>
           <tr>
             <th>Sensor</th>
-            <th>Link</th>
             <th>Value</th>
             <th>When</th>
           </tr>
-          <tr *ngFor="let entity of entities">
+          <tr *ngFor="let entity of entities$ | async">
             <td class="p-2">{{ entity.name?.value }}</td>
-            <td class="p-2">
-              <a
-                class="underline text-indigo-500"
-                href="{{ entity.source?.value }}"
-                >source</a
-              >
-            </td>
+
             <td class="p-2">
               {{
                 entity.precipitation?.value ||
@@ -47,7 +40,7 @@
               }}
             </td>
             <td>
-              {{ entity.dateObserved.value | date: 'MMM dd hh:mm:ss':'GMT' }}
+              {{ entity.dateObserved.value | date: 'MMM dd HH:mm:ss':'GMT' }}
             </td>
           </tr>
         </table>

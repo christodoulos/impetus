@@ -6,7 +6,12 @@ import {
   OAuthResponse,
 } from '@impetus/api-interfaces';
 import { Map, SymbolLayer } from 'mapbox-gl';
-import { UserRepository, UserEffects } from '@impetus/state';
+import {
+  UserRepository,
+  UserEffects,
+  OrionRepository,
+  OrionEffects,
+} from '@impetus/state';
 import { dispatch } from '@ngneat/effects';
 import { AuthService } from './services/auth.service';
 import { map, mergeMap, Observable, tap } from 'rxjs';
@@ -17,24 +22,24 @@ import { OrionService } from './services/orion.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   isAuthenticated$ = this.user.isAuthenticated$;
+  access_token$ = this.user.access_token$;
+  entities$ = this.orion.entities$;
   dispatch = dispatch;
   loginAction = this.effects.loginAction;
+  logoutAction = this.effects.logoutAction;
+  getAllOrionEntitiesAvtion = this.orionEffects.getAllEntitiesAction;
   constructor(
     private http: HttpClient,
     private user: UserRepository,
     private effects: UserEffects,
+    private orion: OrionRepository,
+    private orionEffects: OrionEffects,
     private auth: AuthService // private orion: OrionService
   ) {}
   labelLayerId: string | undefined;
   entities: Array<FiSdmWeatherObserved> = [];
-
-  ngOnInit(): void {
-    this.auth.getAllEntities().subscribe((res) => {
-      this.entities = res;
-    });
-  }
 
   onCredentials(credentials: Credentials) {
     console.log(credentials);
@@ -57,15 +62,16 @@ export class AppComponent implements OnInit {
   }
 
   getAllEntities() {
-    return this.auth.getAllEntities().subscribe((res) => {
-      this.entities = res;
-    });
+    this.access_token$.subscribe((token) =>
+      dispatch(this.getAllOrionEntitiesAvtion({ token }))
+    );
+    // return this.auth.getAllEntities().subscribe((res) => {
+    //   this.entities = res;
+    // });
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('expires_in');
+    dispatch(this.logoutAction);
   }
 
   onMapLoad(map: Map) {

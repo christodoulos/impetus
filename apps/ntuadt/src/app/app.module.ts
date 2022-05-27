@@ -6,7 +6,7 @@ import { EffectsNgModule } from '@ngneat/effects-ng';
 import { MapboxglModule } from '@impetus/mapboxgl';
 
 import { UiModule } from '@impetus/ui';
-import { UserEffects } from '@impetus/state';
+import { UserEffects, OrionEffects } from '@impetus/state';
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
@@ -16,7 +16,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    EffectsNgModule.forRoot([UserEffects]),
+    EffectsNgModule.forRoot([UserEffects, OrionEffects]),
     UiModule,
     MapboxglModule.withConfig({
       accessToken:

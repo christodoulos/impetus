@@ -11,6 +11,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Credentials, OAuthResponse } from '@impetus/api-interfaces';
 import { map, tap } from 'rxjs';
 import { orion } from './keyrock.pep';
+import { getRegistry } from '@ngneat/elf';
 
 export interface User {
   access_token: string;
@@ -33,6 +34,7 @@ export class UserRepository {
   isAuthenticated$ = store.pipe(
     select((state) => new Date() < new Date(state.expires_in))
   );
+  access_token$ = store.pipe(select((state) => state.access_token));
 
   updateUser(user: User) {
     store.update((state) => ({ ...state, ...user }));
@@ -48,7 +50,16 @@ export class UserEffects {
     props<{ user: Credentials }>()
   );
 
+  logoutAction = createAction('[Impetus] User Logout');
+
   userActions = actionsFactory('Impetus');
+
+  logoutActionEffect$ = createEffect((actions$) =>
+    actions$.pipe(
+      ofType(this.logoutAction),
+      tap(() => getRegistry().forEach((store) => store.reset()))
+    )
+  );
 
   loginActionEffect$ = createEffect((actions$) =>
     actions$.pipe(
