@@ -1,5 +1,3 @@
-import { Meta } from '@angular/platform-browser';
-
 export interface Message {
   message: string;
 }

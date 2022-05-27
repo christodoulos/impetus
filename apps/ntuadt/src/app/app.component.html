@@ -12,7 +12,7 @@
   <div class="flex flex-row h-full">
     <div class="w-1/2">
       <form-sign-in
-        *ngIf="!isAuthenticated()"
+        *ngIf="(isAuthenticated$ | async) === false"
         (credentials)="onCredentials($event)"
       ></form-sign-in>
       <div *ngIf="isAuthenticated()" class="p-4 space-y-2 text-xs">

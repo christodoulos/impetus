@@ -6,6 +6,7 @@
     "mapboxgl": "libs/mapboxgl",
     "ntuadt": "apps/ntuadt",
     "ntuadt-e2e": "apps/ntuadt-e2e",
+    "state": "libs/state",
     "ui": "libs/ui"
   }
 }

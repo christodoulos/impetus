@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import {
   Credentials,
   FiSdmWeatherObserved,
-  Message,
   OAuthResponse,
 } from '@impetus/api-interfaces';
 import { Map, SymbolLayer } from 'mapbox-gl';
+import { UserRepository, UserEffects } from '@impetus/state';
+import { dispatch } from '@ngneat/effects';
 import { AuthService } from './services/auth.service';
 import { map, mergeMap, Observable, tap } from 'rxjs';
 import { OrionService } from './services/orion.service';
@@ -17,30 +18,38 @@ import { OrionService } from './services/orion.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  hello$ = this.http.get<Message>('/api/hello');
+  isAuthenticated$ = this.user.isAuthenticated$;
+  dispatch = dispatch;
+  loginAction = this.effects.loginAction;
   constructor(
     private http: HttpClient,
+    private user: UserRepository,
+    private effects: UserEffects,
     private auth: AuthService // private orion: OrionService
   ) {}
   labelLayerId: string | undefined;
   entities: Array<FiSdmWeatherObserved> = [];
 
   ngOnInit(): void {
-    this.getAllEntities();
+    this.auth.getAllEntities().subscribe((res) => {
+      this.entities = res;
+    });
   }
 
   onCredentials(credentials: Credentials) {
-    this.auth
-      .getJWTToken(credentials)
-      .pipe(map((response) => response as OAuthResponse))
-      .subscribe((res) => {
-        localStorage.setItem('access_token', res.access_token);
-        localStorage.setItem('refresh_token', res.refresh_token);
-        localStorage.setItem(
-          'expires_in',
-          new Date(new Date().getTime() + res.expires_in * 1000).toString()
-        );
-      });
+    console.log(credentials);
+    // this.auth
+    //   .getJWTToken(credentials)
+    //   .pipe(map((response) => response as OAuthResponse))
+    //   .subscribe((res) => {
+    //     localStorage.setItem('access_token', res.access_token);
+    //     localStorage.setItem('refresh_token', res.refresh_token);
+    //     localStorage.setItem(
+    //       'expires_in',
+    //       new Date(new Date().getTime() + res.expires_in * 1000).toString()
+    //     );
+    //   });
+    dispatch(this.loginAction({ user: credentials }));
   }
 
   isAuthenticated() {

@@ -17,6 +17,7 @@
     "paths": {
       "@impetus/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@impetus/mapboxgl": ["libs/mapboxgl/src/index.ts"],
+      "@impetus/state": ["libs/state/src/index.ts"],
       "@impetus/ui": ["libs/ui/src/index.ts"]
     }
   },
