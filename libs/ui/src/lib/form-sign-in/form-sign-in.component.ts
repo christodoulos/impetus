@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 
@@ -15,12 +20,13 @@ interface Credentials {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormSignInComponent {
+  @Output() credentials: EventEmitter<Credentials> = new EventEmitter();
   signinForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
-  onSubmit(credentials: Credentials) {
-    console.log(credentials);
+  onSubmit(formValue: Credentials) {
+    this.credentials.emit(formValue);
   }
 }
