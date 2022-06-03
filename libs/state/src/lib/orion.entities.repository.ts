@@ -1,4 +1,3 @@
-import { Store, createState, withProps, select } from '@ngneat/elf';
 import { createStore } from '@ngneat/elf';
 import {
   selectAllEntities,
@@ -13,7 +12,7 @@ import {
   props,
 } from '@ngneat/effects';
 import { Injectable } from '@angular/core';
-import { FiSdmWeatherObserved } from '@impetus/api-interfaces';
+import { FiSdmWeatherObserved } from './orion.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, tap } from 'rxjs';
 

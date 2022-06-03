@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Credentials, FiSdmWeatherObserved } from '@impetus/api-interfaces';
+import { Component, OnInit } from '@angular/core';
 import { Map, SymbolLayer } from 'mapbox-gl';
 import {
+  Credentials,
+  FiSdmWeatherObserved,
   UserRepository,
   UserEffects,
   OrionRepository,
@@ -14,7 +15,7 @@ import { dispatch } from '@ngneat/effects';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isAuthenticated$ = this.user.isAuthenticated$;
   access_token$ = this.user.access_token$;
   entities$ = this.orion.entities$;
@@ -30,6 +31,10 @@ export class AppComponent {
   ) {}
   labelLayerId: string | undefined;
   entities: Array<FiSdmWeatherObserved> = [];
+
+  ngOnInit(): void {
+    this.isAuthenticated$.subscribe(() => this.getAllEntities());
+  }
 
   onCredentials(credentials: Credentials) {
     dispatch(this.loginAction({ user: credentials }));

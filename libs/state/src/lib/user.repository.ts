@@ -8,7 +8,7 @@ import {
 } from '@ngneat/effects';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Credentials, OAuthResponse } from '@impetus/api-interfaces';
+import { Credentials, OAuthResponse } from './user.model';
 import { map, tap } from 'rxjs';
 import { orion } from './keyrock.pep';
 import { getRegistry } from '@ngneat/elf';
