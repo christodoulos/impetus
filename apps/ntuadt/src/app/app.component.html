@@ -5,7 +5,10 @@
     <div>NTUA Digital Twin</div>
     <div><img class="w-24" src="/assets/fiwarelogo.png" /></div>
   </div>
-  <div class="bg-gray-300 flex flex-row items-center p-4 space-x-4">
+  <div
+    *ngIf="isAuthenticated$ | async"
+    class="bg-gray-300 flex flex-row items-center p-4 space-x-4"
+  >
     <span class="cursor-pointer" (click)="getAllEntities()">Itia Station</span>
     <span class="cursor-pointer" (click)="logout()">Logout</span>
   </div>

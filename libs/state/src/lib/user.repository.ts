@@ -12,6 +12,7 @@ import { Credentials, OAuthResponse } from '@impetus/api-interfaces';
 import { map, tap } from 'rxjs';
 import { orion } from './keyrock.pep';
 import { getRegistry } from '@ngneat/elf';
+import { persistState, localStorageStrategy } from '@ngneat/elf-persist-state';
 
 export interface User {
   access_token: string;
@@ -28,6 +29,11 @@ const { state, config } = createState(
 );
 
 const store = new Store({ state, name: 'user', config });
+
+export const persist = persistState(store, {
+  key: 'user',
+  storage: localStorageStrategy,
+});
 
 @Injectable({ providedIn: 'root' })
 export class UserRepository {
