@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MapComponent } from './map/map.component';
 import { MAPBOX_API_KEY } from './map/map.service';
 import { LayerComponent } from './layer/layer.component';
+import { MarkerComponent } from './marker/marker.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [MapComponent, LayerComponent],
-  exports: [MapComponent, LayerComponent],
+  declarations: [MapComponent, LayerComponent, MarkerComponent],
+  exports: [MapComponent, LayerComponent, MarkerComponent],
 })
 export class MapboxglModule {
   static withConfig(config: {

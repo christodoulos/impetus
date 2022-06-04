@@ -74,7 +74,6 @@ export class LayerComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (!this.layerAdded) {
       return;
     }
