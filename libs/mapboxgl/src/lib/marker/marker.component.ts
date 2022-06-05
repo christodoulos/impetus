@@ -20,7 +20,7 @@ import { MapService } from '../map/map.service';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'mapboxgl-marker',
   templateUrl: './marker.component.html',
-  encapsulation: ViewEncapsulation.None, // TODO: WTF is this?
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MarkerComponent
@@ -60,18 +60,17 @@ export class MarkerComponent
   ngAfterViewInit(): void {
     if (this.mapService.mapCreated$)
       this.mapService.mapCreated$.subscribe(() => {
-        console.log('BBBBBBBBBBBBBBBBBB', this.lngLat, this.offset);
         this.markerInstance = this.mapService.addMarker({
           markersOptions: {
-            // offset: this.offset,
-            // anchor: this.anchor,
-            // pitchAlignment: this.pitchAlignment,
-            // rotationAlignment: this.rotationAlignment,
-            // draggable: !!this.draggable,
+            offset: this.offset,
+            anchor: this.anchor,
+            pitchAlignment: this.pitchAlignment,
+            rotationAlignment: this.rotationAlignment,
+            draggable: !!this.draggable,
             element: this.content?.nativeElement,
-            // feature: this.feature,
+            feature: this.feature,
             lngLat: this.lngLat,
-            // clickTolerance: this.clickTolerance,
+            clickTolerance: this.clickTolerance,
           },
           markersEvents: {
             markerDragStart: this.markerDragStart,

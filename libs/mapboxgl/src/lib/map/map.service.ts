@@ -215,7 +215,7 @@ export class MapService {
 
   private hookEvents(events: MapEvents) {
     this.mapInstance?.on('load', (event) => {
-      this.mapLoaded.next();
+      this.mapLoaded.next(undefined);
       this.mapLoaded.complete();
       this.ngZone.run(() => {
         events.mapLoad.emit(event.target);
@@ -685,14 +685,13 @@ export class MapService {
   // //////////////////////////////////////////////////////////////////////////
 
   addMarker(marker: MarkerSetup) {
-    console.log('CCCCCCCCCCCCCCCCC', marker);
     const options: MarkerOptions = {
-      // offset: marker.markersOptions.offset,
-      // anchor: marker.markersOptions.anchor,
-      // draggable: !!marker.markersOptions.draggable,
-      // rotationAlignment: marker.markersOptions.rotationAlignment,
-      // pitchAlignment: marker.markersOptions.pitchAlignment,
-      // clickTolerance: marker.markersOptions.clickTolerance,
+      offset: marker.markersOptions.offset,
+      anchor: marker.markersOptions.anchor,
+      draggable: !!marker.markersOptions.draggable,
+      rotationAlignment: marker.markersOptions.rotationAlignment,
+      pitchAlignment: marker.markersOptions.pitchAlignment,
+      clickTolerance: marker.markersOptions.clickTolerance,
     };
 
     if (marker.markersOptions.element.childNodes.length > 0) {

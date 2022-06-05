@@ -58,17 +58,16 @@
       </div>
     </div>
     <div class="flex flex-grow">
-      <!-- 'mapbox://styles/christodoulos/ckzichi5q001l15p1wpq6sbvs' -->
       <mapboxgl-map
         class="w-full"
-        [style]="'mapbox://styles/mapbox/light-v9'"
+        [style]="'mapbox://styles/christodoulos/ckzichi5q001l15p1wpq6sbvs'"
         [center]="[23.782529708901464, 37.97732290332949]"
         [zoom]="16"
         [pitch]="45"
         [bearing]="-17.6"
         (mapLoad)="onMapLoad($event)"
       >
-        <!-- <mapboxgl-layer
+        <mapboxgl-layer
           id="3d-buildings"
           source="composite"
           sourceLayer="building"
@@ -98,8 +97,8 @@
             'fill-extrusion-opacity': 0.6
           }"
           [before]="labelLayerId"
-        ></mapboxgl-layer> -->
-        <mapboxgl-marker [lngLat]="[37.97385, 23.78743]"></mapboxgl-marker>
+        ></mapboxgl-layer>
+        <mapboxgl-marker [lngLat]="[23.78743, 37.97385]"></mapboxgl-marker>
       </mapboxgl-map>
     </div>
   </div>

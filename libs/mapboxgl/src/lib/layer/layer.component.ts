@@ -45,7 +45,6 @@ export class LayerComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private mapService: MapService) {}
 
   ngOnInit(): void {
-    console.log('layer init');
     if (this.mapService.mapLoaded$)
       // TODO: Understand what exactly is going on here
       this.subscription = this.mapService.mapLoaded$
