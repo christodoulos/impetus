@@ -98,7 +98,19 @@
           }"
           [before]="labelLayerId"
         ></mapboxgl-layer>
-        <mapboxgl-marker [lngLat]="[23.78743, 37.97385]"></mapboxgl-marker>
+        <mapboxgl-marker [lngLat]="[23.78743, 37.97385]">
+          <div
+            [ngStyle]="{
+              'background-image':
+                'url(https://openmeteo.org/media/gentityfile/imported_hydria_gentityfile_1334-1.jpg)',
+              'background-size': 'cover',
+              width: '100px',
+              height: '100px',
+              'border-radius': '50%',
+              cursor: 'pointer'
+            }"
+          ></div>
+        </mapboxgl-marker>
       </mapboxgl-map>
     </div>
   </div>

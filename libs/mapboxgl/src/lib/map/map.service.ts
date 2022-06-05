@@ -23,11 +23,14 @@ import {
   LngLatLike,
   Style,
   LngLatBoundsLike,
+  PopupOptions,
+  Popup,
 } from 'mapbox-gl';
 import { AsyncSubject, first, Observable, Subscription } from 'rxjs';
 import { MarkerSetup } from '../marker/marker.interface';
 import { LayerSetup } from '../layer/layer.interface';
 import { MapEvents } from './map.interfaces';
+import { PopupSetup } from '../popup/popup.interface';
 
 export const MAPBOX_API_KEY = new InjectionToken('MapboxApiKey');
 
@@ -44,6 +47,7 @@ export class MapService {
   private mapCreated = new AsyncSubject<void>();
   private mapLoaded = new AsyncSubject<void>();
   private markersToRemove: Marker[] = [];
+  private popupsToRemove: Popup[] = [];
   private subscription = new Subscription();
 
   constructor(
@@ -760,5 +764,67 @@ export class MapService {
       marker.remove();
     }
     this.markersToRemove = [];
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // Popup Manipulations
+  // //////////////////////////////////////////////////////////////////////////
+
+  createPopup(popup: PopupSetup, element: Node) {
+    return this.ngZone.runOutsideAngular(() => {
+      // Delete undefined popup options ///////////////////////////////////////
+      Object.keys(popup.popupOptions).forEach(
+        (key) =>
+          (<any>popup.popupOptions)[key] === undefined &&
+          delete (<any>popup.popupOptions)[key]
+      );
+      /////////////////////////////////////////////////////////////////////////
+      const popupInstance = new Popup(popup.popupOptions);
+      popupInstance.setDOMContent(element);
+      if (popup.popupEvents.popupClose.observers.length) {
+        popupInstance.on('close', () => {
+          this.ngZone.run(() => {
+            popup.popupEvents.popupClose.emit();
+          });
+        });
+      }
+      if (popup.popupEvents.popupOpen.observers.length) {
+        popupInstance.on('open', () => {
+          this.ngZone.run(() => {
+            popup.popupEvents.popupOpen.emit();
+          });
+        });
+      }
+      return popupInstance;
+    });
+  }
+
+  addPopupToMap(popup: Popup, lngLat: LngLatLike, skipOpenEvent = false) {
+    return this.ngZone.runOutsideAngular(() => {
+      if (skipOpenEvent && (<any>popup)._listeners) {
+        delete (<any>popup)._listeners['open'];
+      }
+      popup.setLngLat(lngLat);
+      if (this.mapInstance) popup.addTo(this.mapInstance);
+    });
+  }
+
+  addPopupToMarker(marker: Marker, popup: Popup) {
+    return this.ngZone.runOutsideAngular(() => {
+      marker.setPopup(popup);
+    });
+  }
+
+  removePopupFromMap(popup: Popup, skipCloseEvent = false) {
+    if (skipCloseEvent && (<any>popup)._listeners) {
+      delete (<any>popup)._listeners['close'];
+    }
+    this.popupsToRemove.push(popup);
+  }
+
+  removePopupFromMarker(marker: Marker) {
+    return this.ngZone.runOutsideAngular(() => {
+      marker.setPopup(undefined);
+    });
   }
 }
