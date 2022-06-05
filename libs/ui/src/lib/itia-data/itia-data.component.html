@@ -1,0 +1,32 @@
+<div class="p-2 bg-indigo-500 text-white font-semibold text-center">
+  Itia Weather Station Measurements
+</div>
+<div class="p-2">
+  <table class="min-w-full divide-y divide-gray-300">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="text-left">Sensor</th>
+        <th class="text-left">Value</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white">
+      <tr *ngFor="let entity of entities$ | async">
+        <td>{{ entity.name?.value }}</td>
+        <td class="text-right">
+          {{
+            entity.precipitation?.value ||
+              entity.temperature?.value ||
+              entity.gustSpeed?.value ||
+              entity.atmosphericPressure?.value ||
+              entity.windSpeed?.value ||
+              entity.windDirection?.value ||
+              entity.solarRadiation?.value ||
+              entity.sunshineDuration?.value ||
+              entity.relativeHumidity?.value ||
+              entity.precipitation?.value
+          }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

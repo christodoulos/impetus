@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     private orionEffects: OrionEffects
   ) {}
   labelLayerId: string | undefined;
-  entities: Array<FiSdmWeatherObserved> = [];
+  // entities: Array<FiSdmWeatherObserved> = [];
 
   ngOnInit(): void {
     this.isAuthenticated$.subscribe(() => this.getAllEntities());

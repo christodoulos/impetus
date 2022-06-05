@@ -98,19 +98,21 @@
           }"
           [before]="labelLayerId"
         ></mapboxgl-layer>
-        <mapboxgl-marker [lngLat]="[23.78743, 37.97385]">
-          <div
-            [ngStyle]="{
-              'background-image':
-                'url(https://openmeteo.org/media/gentityfile/imported_hydria_gentityfile_1334-1.jpg)',
-              'background-size': 'cover',
-              width: '100px',
-              height: '100px',
-              'border-radius': '50%',
-              cursor: 'pointer'
-            }"
-          ></div>
-        </mapboxgl-marker>
+        <div *ngIf="isAuthenticated$ | async">
+          <mapboxgl-marker #itia [lngLat]="[23.78743, 37.97385]">
+            <div class="w-20 flex flex-col items-stretch">
+              <p class="bg-indigo-500 text-white font-semibold text-center">
+                Itia Station
+              </p>
+              <img
+                src="https://openmeteo.org/media/gentityfile/imported_hydria_gentityfile_1334-1.jpg"
+              />
+            </div>
+          </mapboxgl-marker>
+          <mapboxgl-popup [marker]="itia"
+            ><itia-data></itia-data
+          ></mapboxgl-popup>
+        </div>
       </mapboxgl-map>
     </div>
   </div>
