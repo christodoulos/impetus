@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+{% include pagetitle.html %}
+
+<div class="row">
+  <!-- prettier-ignore -->
+  {% assign sorted_cards = site.dashboards | where: 'group', 'plant_nursery' | sort: 'order' %}
+  {% for card in sorted_cards %}
+  <div class="col-lg-6">
+    <!-- Half of content -->
+    <div class="card">
+      <!-- Card header starts here -->
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h4 class="header-title">{{ card.card_title}}</h4>
+        {% if card.links %}
+        <div class="dropdown">
+          <a
+            class="dropdown-toggle arrow-none card-drop"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            href="#"
+          >
+            <i class="mdi mdi-dots-vertical"></i
+          ></a>
+          <div class="dropdown-menu dromdown-menu-end">
+            {% for item in card.links %}
+            <a class="dropdown-item" href="{{item.url}}"> {{item.link}} </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <!-- Card header ends here -->
+      <div class="card-body">{{ card.content }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

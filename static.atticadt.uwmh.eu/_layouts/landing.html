@@ -1,0 +1,46 @@
+---
+layout: default
+---
+
+<div class="row">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-9 col-12 d-flex flex-column gap-1">
+          <h3 class="mt-0">{{ page.title }}</h3>
+          {{ content }} {% include attribution.html %}
+        </div>
+        <div class="col-lg-3 text-center d-none d-lg-block">
+          <img src="assets/images/attica.png" />
+          <p class="font-10">
+            Attica (region). (2023, March 26).
+            <a href="https://en.wikipedia.org/wiki/Attica_(region)"
+              >In Wikipedia.</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- prettier-ignore -->
+  {% assign sorted_cards = site.innovations | where: 'group', 'homepage' | sort: 'order' %}
+  {% for card in sorted_cards %}
+  <div class="col-lg-4" href="/athens-plant-nursery/about.html">
+    <div class="card text-white overflow-hidden {{ card.color }}">
+      <div class="card-body">
+        <div class="toll-free-box text-center">
+          <h4>
+            <i class="{{ card.icon }}"></i>
+            <a class="text-decoration-none text-white" href="{{ card.link }}"
+              >{{ card.title }}</a
+            >
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

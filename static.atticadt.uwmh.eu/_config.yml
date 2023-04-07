@@ -1,0 +1,10 @@
+url: "https://atticadt.uwmh.eu"
+baseurl: "/"
+title: "Impetus Attica Digital Twins"
+
+collections:
+  innovations:
+    output: false
+  dashboards:
+    plant_nursery:
+      output: false
