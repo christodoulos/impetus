@@ -1,6 +1,7 @@
 ---
-layout: apn_landing
+layout: apn
 title: Athens Plant Nursery
+title_url: /athens-plant-nursery
 subtitle: The Digital Twin of the NextGen pilot
 headertitle: NextGen Water Solutions
 ---
