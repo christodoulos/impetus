@@ -8,3 +8,5 @@ collections:
   dashboards:
     plant_nursery:
       output: false
+    plant_nursery_dashboard:
+      output: false

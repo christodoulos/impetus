@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<!-- prettier-ignore -->
+<div class="row">
+  {% assign sorted_cards = site.dashboards | where: 'group', 'plant_nursery_dashboard' | sort: 'order' %} 
+  {% for card in sorted_cards %}
+  <div class="col-md-6 col-xl-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-6">
+            <h3>{{card.metric}}</h3>
+          </div>
+          <div class="col-6">
+            <div id="{{card.metric}}">a</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
