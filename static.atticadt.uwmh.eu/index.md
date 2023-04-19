@@ -1,7 +1,8 @@
 ---
 layout: landing
-title: "Digital Twins of Attica"
 ---
+
+### Digital Twins of Attica
 
 The Digital Twins of the Attica region integrates innovations and pilots that different projects have implemented for climate adaptation. It aims to provide a tool to support climate adaptation efforts and improve the region's resilience against climate change's impacts.
 

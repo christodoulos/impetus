@@ -3,24 +3,30 @@ $(document).ready(function () {
   function initDataTable() {
     $("#apn-live-plc").DataTable().clear().destroy(); // Destroy any existing DataTable instance
 
+    function formatDate(data, type, row) {
+      return moment(data).format("DD/MM/YY H:mm");
+    }
+
+    function formatDecimal(data, type, row) {
+      return data.toFixed(2);
+    }
+
     $("#apn-live-plc").DataTable({
       ajax: { url: "https://atticadt.uwmh.eu/api/nursery/plc", dataSrc: "" },
       columns: [
         {
           data: "ts",
-          render: function (data, type, row) {
-            return moment(data).format("DD/MM/YYYY H:mm");
-          },
+          render: formatDate,
         },
-        { data: "col3" },
-        { data: "col4" },
-        { data: "col5" },
-        { data: "col6" },
-        { data: "col7" },
-        { data: "col8" },
-        { data: "col9" },
-        { data: "col10" },
-        { data: "col11" },
+        { data: "col3", render: formatDecimal },
+        { data: "col4", render: formatDecimal },
+        { data: "col5", render: formatDecimal },
+        { data: "col6", render: formatDecimal },
+        { data: "col7", render: formatDecimal },
+        { data: "col8", render: formatDecimal },
+        { data: "col9", render: formatDecimal },
+        { data: "col10", render: formatDecimal },
+        { data: "col11", render: formatDecimal },
       ],
     });
   }
