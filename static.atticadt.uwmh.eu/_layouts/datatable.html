@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>{{ site.title }}</title>
+    {% include top_styles.html %}
+    <!-- Datatables css -->
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+  </head>
+  <body>
+    <div class="wrapper">     
+      {% include topbar.html %}
+      {% include sidebar.html %}
+      {% include content.html %}
+    </div>
+    <!-- {% include theme_settings.html %}    -->
+    {% include bottom_scripts.html %}
+    <!-- Datatables js -->
+    <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Datatable Init js -->
+    <!-- <script src="/assets/js/pages/demo.datatable-init.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $('#apn-live-plc').DataTable({
+                ajax: {url:'https://atticadt.uwmh.eu/api/nursery/plc', dataSrc: ''},
+                columns: [
+                    { 
+                        data: 'ts', 
+                        render: function (data, type, row) {
+                                    return moment(data).format('DD/MM/YYYY H:mm');
+                                }
+                    },
+                    { data: 'col3' },
+                    { data: 'col4' },
+                    { data: 'col5' },
+                    { data: 'col6' },
+                    { data: 'col7' },
+                    { data: 'col8' },
+                    { data: 'col9' },
+                    { data: 'col10' },
+                    { data: 'col11' },
+                ],
+            });
+        });
+    </script>
+  </body>
+</html>
