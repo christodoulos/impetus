@@ -2,6 +2,15 @@
 <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
 <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
 <script src="/assets/js/app.min.js"></script>
+{% if page.mapbox %}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+    {% case page.mapbox_case %}
+        {% when "apn" %}
+            <script src="/assets/js/pages/apn.live.map.js"></script>
+    {% endcase %}
+{% endif %}
 {% if page.datatable %}
     <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
