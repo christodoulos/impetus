@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 6
 group: plant_nursery
 card_title: A short video tour
 ---

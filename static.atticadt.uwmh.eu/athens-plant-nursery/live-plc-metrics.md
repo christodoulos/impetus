@@ -1,5 +1,6 @@
 ---
 title: Athens Plant Nursery
+title_url: /athens-plant-nursery
 layout: apn
 datatable: true
 datatable_case: apn
