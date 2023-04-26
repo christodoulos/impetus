@@ -1,6 +1,7 @@
 ---
 layout: apn
 title: Athens Plant Nursery
+title_url: /athens-plant-nursery 5
 apn_weather: true
 ---
 
@@ -9,6 +10,20 @@ apn_weather: true
 <div class="item">
     <h3 id="city_name"></h3>
     <p id="wheather_description"></p>
+</div>
+
+<div class="d-flex align-items-center justify-content-center">
+
+<img id="img">
+
+<div class="compass">
+      <div class="direction">
+        <p>
+            <span id="wind_cdir"></span><span id="wind_spd"> m/s</span>
+        </p>
+      </div>
+      <div id="arrow"></div>
+    </div>
 </div>
 
 <table class="table table-bordered table-centered">

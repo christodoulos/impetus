@@ -3,62 +3,12 @@ order: 4
 group: plant_nursery
 card_title: Local Weather
 links:
-  - link: pH of aeriation tank
-    url: /athens-plant-nursery/ph.html
+  - link: Most Recent Update
+    url: /athens-plant-nursery/weather.html
 ---
 
-<div class="item">
-    <h3 id="city_name"></h3>
-    <p id="wheather_description"></p>
-</div>
+<a class="weatherwidget-io" href="https://forecast7.com/en/37d9823d76/zografou/" data-label_1="ZOGRAFOU" data-label_2="WEATHER" data-font="Noto Sans" data-icons="Climacons Animated" data-theme="pure" >ZOGRAFOU WEATHER</a>
 
-<table class="table table-bordered table-centered">
-    <tr>
-      <td>Feels Like</td>
-      <td><span id="app_temp"></span><i class="ri-celsius-line"></i></td>
-    </tr>
-    <tr>
-      <td>Atm. Pressure</td>
-      <td><span id="pres"></span> mb</td>
-    </tr>
-    <tr>
-      <td>Wind Gust</td>
-      <td><span id="gust"></span> m/s</td>
-    </tr>
-    <tr>
-      <td>Relative Humidity</td>
-      <td><span id="rh"></span>%</td>
-    </tr>
-    <tr>
-      <td>Dew Point</td>
-      <td><span id="dewpt"></span>&#8451;</td>
-    </tr>
-    <tr>
-      <td>UV Index</td>
-      <td><span id="uv"></span></td>
-    </tr>
-    <tr>
-      <td>Air Quality Index</td>
-      <td><span id="aqi"></span></td>
-    </tr>
-    <tr>
-      <td>Diffuse horizontal solar irradiance</td>
-      <td><span id="dhi"></span> W/m^2</td>
-    </tr>
-    <tr>
-      <td>Direct normal solar irradiance</td>
-      <td><span id="dni"></span> W/m^2</td>
-    </tr>
-    <tr>
-      <td>Global horizontal solar irradiance</td>
-      <td><span id="ghi"></span> W/m^2</td>
-    </tr>
-    <tr>
-      <td>Estimated Solar Radiation</td>
-      <td><span id="solar_rad"></span> W/m^2</td>
-    </tr>
-    <tr>
-      <td>Solar elevation angle</td>
-      <td><span id="elev_angle"></span> degrees</td>
-    </tr>
-  </table>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
