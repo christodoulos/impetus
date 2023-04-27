@@ -1,7 +1,7 @@
 ---
 layout: apn
 title: Athens Plant Nursery
-title_url: /athens-plant-nursery 5
+title_url: /athens-plant-nursery
 apn_weather: true
 ---
 
