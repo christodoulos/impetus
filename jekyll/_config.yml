@@ -10,3 +10,7 @@ collections:
       output: false
     plant_nursery_dashboard:
       output: false
+    farmair:
+      output: false
+    kokotou0:
+      output: false

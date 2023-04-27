@@ -1,0 +1,61 @@
+---
+layout: default
+---
+
+<h4>FarmAIr innovation</h4>
+
+<p>
+  Unlike what is currently available in the market,
+  <a href="https://farmair.io">FarmAIr technology</a> (patented) use thermal
+  images and Artificial Intelligence, in order to reveal Plant Stress, before
+  the onset of any symptom. FarmAIr helps farmers and agronomists to spot what
+  they can't see with the naked eye, so as to be aware and take all necessary
+  precautions and actions, that will help prevent any spread. At the moment,
+  farmAIr technology is available for vineyards, planning to gradually expand to
+  virtually any plant with leaves.
+</p>
+
+<h4>What FarmAIr offers</h4>
+
+<p>
+  FarmAIr is a dynamic, flexible and customer-oriented AgriTech company,
+  committed to always bring cutting-edge technology and the best experience to
+  farmers.
+</p>
+
+<div class="row d-flex">
+  <!-- prettier-ignore -->
+  {% assign sorted_cards = site.dashboards | where: 'group', 'farmair' | sort: 'order' %}
+  {% for card in sorted_cards %}
+  <div class="col-md-6 col-xl-3 d-flex">
+    <!-- Half of content -->
+    <div class="card flex-fill">
+      <!-- Card header starts here -->
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h4 class="header-title">{{ card.card_title}}</h4>
+        {% if card.links %}
+        <div class="dropdown">
+          <a
+            class="dropdown-toggle arrow-none card-drop"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            href="#"
+          >
+            <i class="mdi mdi-dots-vertical"></i
+          ></a>
+          <div class="dropdown-menu dromdown-menu-end">
+            {% for item in card.links %}
+            <a class="dropdown-item" href="{{item.url}}"> {{item.link}} </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <!-- Card header ends here -->
+      <div class="card-body">{{ card.content }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
