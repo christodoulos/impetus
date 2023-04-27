@@ -17,6 +17,9 @@ $(document).ready(() => {
           y6: item.col9,
           y7: item.col10,
           y8: item.col11,
+          y9: item.col12,
+          y10: item.col13,
+          y11: item.col14,
         };
       });
       const series = [
@@ -83,6 +86,27 @@ $(document).ready(() => {
             y: item.y8.toFixed(2),
           })),
         },
+        {
+          name: "LT1",
+          data: _.map(attrData, (item) => ({
+            x: item.x,
+            y: item.y9.toFixed(2),
+          })),
+        },
+        {
+          name: "LT2",
+          data: _.map(attrData, (item) => ({
+            x: item.x,
+            y: item.y10.toFixed(2),
+          })),
+        },
+        {
+          name: "LT3",
+          data: _.map(attrData, (item) => ({
+            x: item.x,
+            y: item.y11.toFixed(2),
+          })),
+        },
       ];
       console.log(series[0]);
 
@@ -121,7 +145,20 @@ $(document).ready(() => {
 
       console.log(optionsArray);
 
-      const chartDIVs = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9"];
+      const chartDIVs = [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12",
+      ];
 
       optionsArray.forEach((options, index) => {
         const chart = new ApexCharts(
