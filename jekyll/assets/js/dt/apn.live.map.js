@@ -1,6 +1,5 @@
 $(document).ready(() => {
-  mapboxgl.accessToken =
-    "_pk.eyJ1IjoiY2hyaXN0b2RvdWxvcyIsImEiOiJja3lvdzVhb2MwNGJoMnVwN2ptd2tna2Y1In0.jiaYFXf01T5_R73Tf6T4jA";
+  mapboxgl.accessToken = mapbox_token;
   const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v12",
@@ -109,7 +108,6 @@ $(document).ready(() => {
   };
 
   map.on("style.load", () => {
-    console.log("lala");
     map.addLayer(customLayer, "waterway-label");
   });
 
