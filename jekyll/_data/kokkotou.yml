@@ -1,0 +1,22 @@
+cswinery:
+  experiments:
+    - D9EXPIZJE6BOI136
+    - DFO2PL11DZ83GPEQ
+    - P0MTZ3PJXDJ8EGEZ
+  layers:
+    - ai
+    - beta
+    - comb
+    - dsm
+    - no_pseu
+chardonay:
+  experiments:
+    - 3RKRVMV5TEE45O1D
+    - 6P7LZSYJOMR9I2CX
+    - L3A0H0HU7UOJDHFA
+  layers:
+    - ai
+    - beta
+    - comb
+    - dsm
+    - no_pseu

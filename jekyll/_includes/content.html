@@ -1,29 +1,4 @@
 <!-- prettier-ignore -->
-<div class="content-page">
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        {% if page.title %}
-        <div class="row">
-          <div class="col-12">
-            <div class="page-title-box">
-              <div class="page-title-right">
-                <a style href="/">Digital Twins of Attica</a>
-              </div>
-              <h4 class="page-title">
-                <a href="{{page.title_url}}">{{page.title}}</a>
-              </h4>
-            </div>
-          </div>
-        </div>
-        {% else %}
-        <div class="row"><p></p></div>
-        {% endif %} 
-        {{ content }}
-      </div>
-    </div>
-    <!-- container -->
-  </div>
-  <!-- content -->
-  {% include footer.html %}
-</div>
+{% include page_title.html %} 
+{{ content }} 
+{% include footer.html %}

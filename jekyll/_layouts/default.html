@@ -13,7 +13,13 @@ layout: compress
     <div class="wrapper">     
       {% include topbar.html %}
       {% include sidebar.html %}
-      {% include content.html %}
+      <div class="content-page">
+        <div class="content">
+          <div class="container-fluid">
+            {% include content.html %}
+          </div>
+        </div>
+      </div>
     </div>
     {% include bottom_scripts.html %}
   </body>
