@@ -7,20 +7,24 @@
         <!-- Logo light -->
         <a href="index.html" class="logo-light">
           <span class="logo-lg">
-            <img src="/assets/images/uwmh-blue-logo.png" alt="logo" />
+            <img src="{{ "/assets/images/uwmh-blue-logo.png" | relative_url }}"
+            alt="logo" />
           </span>
           <span class="logo-sm">
-            <img src="/assets/images/uwmh-blue-logo-sm.png" alt="small logo" />
+            <img src="{{ "/assets/images/uwmh-blue-logo-sm.png" | relative_url
+            }}" alt="small logo" />
           </span>
         </a>
 
         <!-- Logo Dark -->
         <a href="index.html" class="logo-dark">
           <span class="logo-lg">
-            <img src="/assets/images/uwmh-blue-logo.png" alt="dark logo" />
+            <img src="{{ "/assets/images/uwmh-blue-logo.png" | relative_url }}"
+            alt="dark logo" />
           </span>
           <span class="logo-sm">
-            <img src="/assets/images/uwmh-blue-logo-sm.png" alt="small logo" />
+            <img src="{{ "/assets/images/uwmh-blue-logo-sm.png" | relative_url
+            }}" alt="small logo" />
           </span>
         </a>
       </div>
@@ -66,12 +70,8 @@
           aria-expanded="false"
         >
           <span class="account-user-avatar">
-            <img
-              src="/assets/images/avatar-1.jpg"
-              alt="user-image"
-              width="32"
-              class="rounded-circle"
-            />
+            <img src="{{ "/assets/images/avatar-1.jpg" | relative_url }}"
+            alt="user-image" width="32" class="rounded-circle" />
           </span>
           <span class="d-lg-flex flex-column gap-1 d-none">
             <h5 class="my-0">John Doe</h5>

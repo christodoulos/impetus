@@ -1,12 +1,11 @@
 url: "https://atticadt.uwmh.eu"
-baseurl: "/"
+baseurl: "/v2"
 title: "Impetus Attica Digital Twins"
 
 plugins:
   - jekyll-minifier
 
 jekyll-minifier:
-  exclude: "assets/js/vendor"
   remove_spaces_inside_tags: true
   remove_multi_spaces: true
   remove_comments: true

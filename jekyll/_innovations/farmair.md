@@ -1,6 +1,6 @@
 ---
 title: FarmAIr
-link: /
+link: /farmair
 icon: ri-leaf-line
 color: bg-success
 order: 2

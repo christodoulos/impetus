@@ -26,7 +26,9 @@ layout: default
           ></a>
           <div class="dropdown-menu dromdown-menu-end">
             {% for item in card.links %}
-            <a class="dropdown-item" href="{{item.url}}"> {{item.link}} </a>
+            <a class="dropdown-item" href="{{item.url | relative_url}}">
+              {{item.link}}
+            </a>
             {% endfor %}
           </div>
         </div>

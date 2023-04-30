@@ -1,15 +1,15 @@
-<link rel="shortcut icon" href="/assets/images/favicon.ico" />
-<script src="/assets/js/hyper-config.js"></script>
-<link href="/assets/css/app-saas.css" rel="stylesheet" type="text/css" id="app-style" />
-<link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="{{ "/assets/images/favicon.ico" | relative_url }}" />
+<script src="{{ "/assets/js/hyper-config.js" | relative_url }}"></script>
+<link href="{{ "/assets/css/app-saas.css" | relative_url }}" rel="stylesheet" type="text/css" id="app-style" />
+<link href="{{ "/assets/css/icons.min.css" | relative_url }}" rel="stylesheet" type="text/css" />
 {% if page.datatable %}
-  <link href="/assets/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
-  <link href="/assets/css/dataTables.responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
-  <link href="/assets/css/dataTables.buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+  <link href="{{ "/assets/css/dataTables.bootstrap5.min.css" | relative_url }}" rel="stylesheet" type="text/css" />
+  <link href="{{ "/assets/css/dataTables.responsive.bootstrap5.min.css" | relative_url }}" rel="stylesheet" type="text/css" />
+  <link href="{{ "/assets/css/dataTables.buttons.bootstrap5.min.css" | relative_url }}" rel="stylesheet" type="text/css" />
 
 {% endif %} 
 {% if page.mapbox %}
-  <link href='/assets/css/mapbox-gl.css' rel='stylesheet' />
+  <link href="{{ "/assets/css/mapbox-gl.css" | relative_url }}" rel="stylesheet" />
   
 {% endif %}
 <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">

@@ -53,7 +53,7 @@ $(document).ready(() => {
 
       // use the three.js GLTF loader to add the 3D model to the three.js scene
       const loader = new THREE.GLTFLoader();
-      loader.load("/assets/glb/tank.glb", (gltf) => {
+      loader.load(`${baseUrl}/assets/glb/tank.glb`, (gltf) => {
         console.log("loaded?");
         this.scene.add(gltf.scene);
       });

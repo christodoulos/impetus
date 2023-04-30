@@ -28,13 +28,15 @@ layout: default
   <!-- prettier-ignore -->
   {% assign sorted_cards = site.innovations | where: 'group', 'homepage' | sort: 'order' %}
   {% for card in sorted_cards %}
-  <div class="col-lg-4" href="/athens-plant-nursery/about.html">
+  <div class="col-lg-4">
     <div class="card text-white overflow-hidden {{ card.color }}">
       <div class="card-body">
         <div class="toll-free-box text-center">
           <h4>
             <i class="{{ card.icon }}"></i>
-            <a class="text-decoration-none text-white" href="{{ card.link }}"
+            <a
+              class="text-decoration-none text-white"
+              href="{{ card.link | relative_url }}"
               >{{ card.title }}</a
             >
           </h4>

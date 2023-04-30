@@ -6,7 +6,7 @@
       </div>
       <h4 class="page-title">
         {% if page.title %}
-        <a href="{{page.title_url}}">{{page.title}}</a>
+        <a href="{{page.title_url | relative_url}}">{{page.title}}</a>
         {% else %}
         <span>&nbsp;</span>
         {% endif %}
