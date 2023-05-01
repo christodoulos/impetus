@@ -8,6 +8,9 @@ layout: compress
     <meta charset="utf-8">
     <title>{{ site.title }}</title>
     {% include top_styles.html %}   
+    {% if jekyll.environment == 'production' %}
+      {% include analytics.html %}
+    {% endif %}
   </head>
   <body>
     <div class="wrapper">     
