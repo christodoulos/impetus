@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 cd $HOME/Workspace/impetus/jekyll
-JEKYLL_ENV=production bundle exec jekyll build --config _config.yml,_config.secrets.yml
+# export JEKYLL_ENV=production
+rm -rf _site && bundle exec jekyll build --config _config.yml,_config.secrets.yml
 rsync -avz --delete _site/* atticadt@atticadt:/home/atticadt/v2/

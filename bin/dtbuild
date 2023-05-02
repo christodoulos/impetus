@@ -1,3 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 cd $HOME/Workspace/impetus/jekyll
+export JEKYLL_ENV=production
 bundle exec jekyll build --config _config.yml,_config.secrets.yml
