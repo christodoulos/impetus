@@ -1,4 +1,10 @@
 <!-- prettier-ignore -->
 {% include page_title.html %} 
-{{ content }} 
-{% include footer.html %}
+{% if page.logo %}
+<div class="row">
+  <div class="col-lg-9 col-12 d-flex flex-column gap-1">{{ content }}</div>
+  <div class="col-lg-3 text-center d-none d-lg-block">
+    <img src="{{ page.logo | relative_url }}" width="200px;" />
+  </div>
+</div>
+{% else %} {{ content }} {% endif %} {% include footer.html %}

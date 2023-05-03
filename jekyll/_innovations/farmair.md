@@ -1,5 +1,5 @@
 ---
-title: FarmAIr
+title: farmAIr
 link: /farmair
 icon: ri-leaf-line
 color: bg-success

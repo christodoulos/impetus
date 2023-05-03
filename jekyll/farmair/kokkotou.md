@@ -1,5 +1,5 @@
 ---
-title: FarmAIr
+title: farmAIr
 title_url: /farmair
 layout: kokkotou
 mapbox: true
