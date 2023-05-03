@@ -19,4 +19,4 @@ The virtual host `atticadt.uwmh.eu` resides in its own home directory `/home/att
 
 ## Jekyll
 
-The jekyll folder includes the [Jekyll](https://jekyllrb.com/) sources of the [atticadt.uwmh.eu](https://atticadt.uwmh.eu) website.
+The jekyll folder includes the [Jekyll](https://jekyllrb.com/) sources of the [atticadt.uwmh.eu](https://atticadt.uwmh.eu/v2) website.
