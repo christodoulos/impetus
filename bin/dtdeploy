@@ -1,5 +1,10 @@
 #!/bin/bash
 cd $HOME/Workspace/impetus/jekyll
-# export JEKYLL_ENV=production
+export JEKYLL_ENV=production
 rm -rf _site && bundle exec jekyll build --config _config.yml,_config.secrets.yml
-rsync -avz --delete _site/* atticadt@atticadt:/home/atticadt/v2/
+if [ $? -eq 0 ]
+then
+    rsync -avz --delete _site/* atticadt@atticadt:/home/atticadt/v2/
+else
+    echo "Didn't deploy site for there are build errors" >$2
+fi
