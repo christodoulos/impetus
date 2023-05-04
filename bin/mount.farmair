@@ -1,0 +1,2 @@
+#!/bin/bash
+sshfs giorgos@atticadt:/mnt/HC_Volume_25058235/farmair /home/christodoulos/mnt/giorgos-atticadt
