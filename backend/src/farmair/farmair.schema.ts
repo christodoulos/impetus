@@ -1,13 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { FeatureCollectionSchema } from 'src/feature-collection.schema';
+import { FeatureCollection, FeatureCollectionSchema } from 'src/geojson.schema';
 
 @Schema({ collection: 'farmair' })
 export class FarmAIr {
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   name: string;
-  @Prop({ type: FeatureCollectionSchema })
-  geo: typeof FeatureCollectionSchema;
+  @Prop({ type: FeatureCollectionSchema, required: true })
+  geojson: FeatureCollection;
 }
 
 export type FarmAIrDocument = HydratedDocument<FarmAIr>;

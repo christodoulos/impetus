@@ -6,7 +6,7 @@ import { FarmAIr, FarmAIrSchema } from './farmair.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'farmair', schema: FarmAIrSchema }]),
+    MongooseModule.forFeature([{ name: FarmAIr.name, schema: FarmAIrSchema }]),
   ],
   providers: [FarmairService],
   controllers: [FarmairController],
