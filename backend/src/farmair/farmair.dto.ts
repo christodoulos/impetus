@@ -256,6 +256,11 @@ export class FarmAIrDTO {
   @IsNotEmpty()
   name: string;
 
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => String)
+  layers: string[];
+
   @IsNotEmptyObject()
   geojson: FeatureCollectionDto;
 

@@ -273,6 +273,9 @@ export class FarmAIr {
   @Prop({ type: String, required: true })
   name: string;
 
+  @Prop({ type: [String], required: true })
+  layers: string[];
+
   @Prop({ type: FeatureCollectionSchema, required: true })
   geojson: FeatureCollection;
 

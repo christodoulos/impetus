@@ -10,6 +10,7 @@ layout: default
         <h4 class="header-title">Kokkotou Vineyards</h4>
       </div>
       <div class="card-body">
+        {% include select_widget.html label="Select a vineyard" options=page.options %}
         <p>
           <a href="https://farmair.io/">farmAIr</a> and Kokkotou Vineyards have kindly granted permission to use the present data.
         </p>
@@ -116,7 +117,7 @@ layout: default
           </div>
         </form>
       </div>
-      <div id="mapp" style="height: 800px;"></div>
+      <!-- <div id="mapp" style="height: 800px;"></div> -->
     </div>
   </div>
 </div>

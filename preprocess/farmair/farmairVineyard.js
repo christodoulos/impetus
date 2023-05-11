@@ -17,6 +17,7 @@ const scansObj = JSON.parse(scans);
 
 const vineyard = {
   name: dname,
+  layers: ["ai", "beta", "comb", "dsm", "no_pseu"],
   geojson: geojsonObj,
   scans: scansObj,
 };
