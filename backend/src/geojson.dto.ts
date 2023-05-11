@@ -36,4 +36,8 @@ export class FeatureCollectionDto {
   @ValidateNested({ each: true })
   @Type(() => Feature)
   features: Feature[];
+
+  @IsObject()
+  @IsOptional()
+  properties: Record<string, any>;
 }

@@ -2,6 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const toGeoJSON = require("togeojson");
 const { DOMParser } = require("xmldom");
+const turf = require("@turf/turf");
 
 async function convertKMLToGeoJSON(inputFile, outputFile) {
   try {
@@ -14,6 +15,13 @@ async function convertKMLToGeoJSON(inputFile, outputFile) {
 
     // Convert DOM to GeoJSON
     const geoJSON = toGeoJSON.kml(kmlDOM);
+
+    const centroid = turf.centroid(geoJSON);
+    const bbox = turf.bbox(geoJSON);
+    geoJSON.properties = {
+      centroid: centroid.geometry.coordinates,
+      bbox: bbox,
+    };
 
     // Write the GeoJSON to a file
     await fs.writeFile(outputFile, JSON.stringify(geoJSON, null, 2), "utf8");

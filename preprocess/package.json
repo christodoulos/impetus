@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@turf/turf": "^6.5.0",
     "axios": "^1.4.0",
     "togeojson": "^0.16.0"
   }

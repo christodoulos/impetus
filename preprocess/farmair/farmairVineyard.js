@@ -10,6 +10,7 @@ const scansFile = `${fpath}scans.json`;
 
 const geojson = fs.readFileSync(geojsonFile, "utf-8");
 const geojsonObj = JSON.parse(geojson);
+console.log(geojsonObj);
 
 const scans = fs.readFileSync(scansFile, "utf-8");
 const scansObj = JSON.parse(scans);

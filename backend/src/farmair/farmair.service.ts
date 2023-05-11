@@ -13,7 +13,7 @@ export class FarmairService {
   async addScan(scan: FarmAIrDTO): Promise<FarmAIr> {
     let existing = await this.farmairModel.findOne({ name: scan.name });
     if (existing) {
-      existing = Object.assign(existing, scan);
+      existing.overwrite(scan);
       return existing.save();
     } else {
       const createdScan = new this.farmairModel(scan);

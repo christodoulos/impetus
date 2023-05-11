@@ -40,6 +40,9 @@ export class FeatureCollection {
 
   @Prop({ type: [FeatureSchema], required: true })
   features: Feature[];
+
+  @Prop({ type: Object, default: {} })
+  properties: Record<string, any>;
 }
 
 export const FeatureCollectionSchema =
