@@ -47,6 +47,6 @@ async function writeResultsToFile(results, outputFile) {
   const fpath = args[0];
   const dname = path.basename(fpath);
   const results = await scanDirectory(fpath);
-  console.log("Results:", results);
+  // console.log("Results:", results);
   await writeResultsToFile(results, `${fpath}scans.json`);
 })();

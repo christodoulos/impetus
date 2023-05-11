@@ -11,7 +11,13 @@ export class FarmairService {
   ) {}
 
   async addScan(scan: FarmAIrDTO): Promise<FarmAIr> {
-    const createdScan = new this.farmairModel(scan);
-    return createdScan.save();
+    let existing = await this.farmairModel.findOne({ name: scan.name });
+    if (existing) {
+      existing = Object.assign(existing, scan);
+      return existing.save();
+    } else {
+      const createdScan = new this.farmairModel(scan);
+      return createdScan.save();
+    }
   }
 }
