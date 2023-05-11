@@ -8,7 +8,7 @@ export enum GeoJsonType {
   Polygon = 'Polygon',
 }
 
-@Schema()
+@Schema({ _id: false })
 class Geometry {
   @Prop({ type: String, required: true, enum: Object.values(GeoJsonType) })
   type: GeoJsonType;
@@ -19,7 +19,7 @@ class Geometry {
 
 const GeometrySchema = SchemaFactory.createForClass(Geometry);
 
-@Schema()
+@Schema({ _id: false })
 class Feature {
   @Prop({ type: String, required: true, enum: [GeoJsonType.Feature] })
   type: GeoJsonType.Feature;
@@ -33,7 +33,7 @@ class Feature {
 
 const FeatureSchema = SchemaFactory.createForClass(Feature);
 
-@Schema()
+@Schema({ _id: false })
 export class FeatureCollection {
   @Prop({ type: String, required: true, enum: [GeoJsonType.FeatureCollection] })
   type: GeoJsonType.FeatureCollection;

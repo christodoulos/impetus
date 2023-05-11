@@ -10,8 +10,8 @@ export class FarmairService {
     @InjectModel(FarmAIr.name) private farmairModel: Model<FarmAIrDocument>,
   ) {}
 
-  async addExperiment(experiment: FarmAIrDTO): Promise<FarmAIr> {
-    const createdExperiment = new this.farmairModel(experiment);
-    return createdExperiment.save();
+  async addScan(scan: FarmAIrDTO): Promise<FarmAIr> {
+    const createdScan = new this.farmairModel(scan);
+    return createdScan.save();
   }
 }

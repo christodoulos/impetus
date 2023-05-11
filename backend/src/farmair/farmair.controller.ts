@@ -7,8 +7,7 @@ export class FarmairController {
   constructor(private readonly service: FarmairService) {}
 
   @Post()
-  async farmair_experiment_write(@Body() body: { data: FarmAIrDTO }) {
-    console.log(body.data);
-    return await this.service.addExperiment(body.data);
+  async farmairPostScan(@Body() data: FarmAIrDTO) {
+    return await this.service.addScan(data);
   }
 }

@@ -4,7 +4,7 @@ import { FeatureCollection, FeatureCollectionSchema } from 'src/geojson.schema';
 
 // Soil Data ///////////////////////////////////////////////////////////
 
-@Schema()
+@Schema({ _id: false })
 export class SoilData {
   @Prop({ required: true })
   dt: number;
@@ -19,11 +19,11 @@ export class SoilData {
   t0: number;
 }
 
-export const SoilDataSchema = SchemaFactory.createForClass(SoilData);
+const SoilDataSchema = SchemaFactory.createForClass(SoilData);
 
 // Weather Data ////////////////////////////////////////////////////////
 
-@Schema()
+@Schema({ _id: false })
 class Weather {
   @Prop({ required: true })
   id: number;
@@ -38,9 +38,9 @@ class Weather {
   icon: string;
 }
 
-export const WeatherSchema = SchemaFactory.createForClass(Weather);
+const WeatherSchema = SchemaFactory.createForClass(Weather);
 
-@Schema()
+@Schema({ _id: false })
 class Main {
   @Prop({ required: true })
   temp: number;
@@ -61,9 +61,9 @@ class Main {
   temp_max: number;
 }
 
-export const MainSchema = SchemaFactory.createForClass(Main);
+const MainSchema = SchemaFactory.createForClass(Main);
 
-@Schema()
+@Schema({ _id: false })
 class Wind {
   @Prop({ required: true })
   speed: number;
@@ -75,17 +75,17 @@ class Wind {
   gust: number;
 }
 
-export const WindSchema = SchemaFactory.createForClass(Wind);
+const WindSchema = SchemaFactory.createForClass(Wind);
 
-@Schema()
+@Schema({ _id: false })
 class Clouds {
   @Prop({ required: true })
   all: number;
 }
 
-export const CloudsSchema = SchemaFactory.createForClass(Clouds);
+const CloudsSchema = SchemaFactory.createForClass(Clouds);
 
-@Schema()
+@Schema({ _id: false })
 class WeatherData {
   @Prop({ required: true })
   dt: number;
@@ -107,7 +107,7 @@ const WeatherDataSchema = SchemaFactory.createForClass(WeatherData);
 
 // Satellite Data //////////////////////////////////////////////////
 
-@Schema()
+@Schema({ _id: false })
 class Sun {
   @Prop({ required: true })
   elevation: number;
@@ -118,7 +118,7 @@ class Sun {
 
 const SunSchema = SchemaFactory.createForClass(Sun);
 
-@Schema()
+@Schema({ _id: false })
 class CommonSatellite {
   @Prop({ required: true })
   truecolor: string;
@@ -145,25 +145,25 @@ class CommonSatellite {
   ndwi: string;
 }
 
-const CommonSatelliteSchema = SchemaFactory.createForClass(CommonSatellite);
+// const CommonSatelliteSchema = SchemaFactory.createForClass(CommonSatellite);
 
-@Schema()
+@Schema({ _id: false })
 class Image extends CommonSatellite {}
 
 const ImageSchema = SchemaFactory.createForClass(Image);
 
-@Schema()
+@Schema({ _id: false })
 class Tile extends CommonSatellite {}
 
 const TileSchema = SchemaFactory.createForClass(Tile);
 
-@Schema()
+@Schema({ _id: false })
 class Data extends CommonSatellite {}
 
 const DataSchema = SchemaFactory.createForClass(Data);
 
-@Schema()
-export class SatelliteData {
+@Schema({ _id: false })
+class SatelliteData {
   @Prop({ type: Number, required: true })
   dt: number;
 
@@ -193,7 +193,7 @@ const SatelliteDataSchema = SchemaFactory.createForClass(SatelliteData);
 
 // Satellite Stats //////////////////////////////////////////////////////
 
-@Schema()
+@Schema({ _id: false })
 class StatsBase {
   @Prop({ required: true })
   std: number;
@@ -225,8 +225,8 @@ class StatsBase {
 
 const StatsBaseSchema = SchemaFactory.createForClass(StatsBase);
 
-@Schema()
-export class SatelliteStats {
+@Schema({ _id: false })
+class SatelliteStats {
   @Prop({ type: [StatsBaseSchema], required: true })
   ndvi: StatsBase[];
 
@@ -248,7 +248,7 @@ export class SatelliteStats {
 
 const SatelliteStatsSchema = SchemaFactory.createForClass(SatelliteStats);
 
-@Schema()
+@Schema({ _id: false })
 export class Scan {
   @Prop({ type: String, required: true })
   uuid: string;
