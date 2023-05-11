@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { FeatureCollection, FeatureCollectionSchema } from 'src/geojson.schema';
 
-// Soil Data ///////////////////////////////////////////////////////////
+// Soil Data
 
 @Schema({ _id: false })
 export class SoilData {
@@ -21,7 +21,7 @@ export class SoilData {
 
 const SoilDataSchema = SchemaFactory.createForClass(SoilData);
 
-// Weather Data ////////////////////////////////////////////////////////
+// Weather Data
 
 @Schema({ _id: false })
 class Weather {
@@ -105,7 +105,7 @@ class WeatherData {
 
 const WeatherDataSchema = SchemaFactory.createForClass(WeatherData);
 
-// Satellite Data //////////////////////////////////////////////////
+// Satellite Data
 
 @Schema({ _id: false })
 class Sun {
@@ -191,7 +191,7 @@ class SatelliteData {
 
 const SatelliteDataSchema = SchemaFactory.createForClass(SatelliteData);
 
-// Satellite Stats //////////////////////////////////////////////////////
+// Satellite Stats
 
 @Schema({ _id: false })
 class StatsBase {

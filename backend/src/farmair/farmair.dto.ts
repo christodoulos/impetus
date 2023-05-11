@@ -104,7 +104,7 @@ export class WeatherDataDto {
   clouds: CloudsDto;
 }
 
-// SatelliteData DTO ///////////////////////////////////////////////////
+// SatelliteData DTO
 
 class SunDto {
   @IsNotEmpty()
@@ -233,7 +233,7 @@ class SatelliteStatsDto {
   ndwi: StatsBaseDto[];
 }
 
-// ScanData consolidates soil data, weather data, satellite data and satellite statistics
+// ScanData: soil data, weather data, satellite data and satellite statistics
 
 class ScanDataDto {
   soil_data: SoilDataCollectionDto;
