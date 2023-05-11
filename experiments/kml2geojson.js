@@ -1,6 +1,7 @@
-import { promises as fs } from "fs";
-import { kml } from "togeojson";
-import { DOMParser } from "xmldom";
+const fs = require("fs").promises;
+const path = require("path");
+const toGeoJSON = require("togeojson");
+const { DOMParser } = require("xmldom");
 
 async function convertKMLToGeoJSON(inputFile, outputFile) {
   try {
@@ -12,7 +13,7 @@ async function convertKMLToGeoJSON(inputFile, outputFile) {
     const kmlDOM = parser.parseFromString(kmlData, "application/xml");
 
     // Convert DOM to GeoJSON
-    const geoJSON = kml(kmlDOM);
+    const geoJSON = toGeoJSON.kml(kmlDOM);
 
     // Write the GeoJSON to a file
     await fs.writeFile(outputFile, JSON.stringify(geoJSON, null, 2), "utf8");
@@ -22,10 +23,11 @@ async function convertKMLToGeoJSON(inputFile, outputFile) {
   }
 }
 
-// Usage example
 (async () => {
-  await convertKMLToGeoJSON(
-    "data/chardonay oinodiadromes/chardonay oinodiadromes.kml",
-    "output.geojson"
-  );
+  const args = process.argv.slice(2);
+  const kmlFile = args[0];
+  const fpath = path.dirname(kmlFile);
+  const fname = path.basename(kmlFile, ".kml");
+  const output = `${fpath}/${fname}.geojson`;
+  await convertKMLToGeoJSON(kmlFile, output);
 })();

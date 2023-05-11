@@ -1,5 +1,5 @@
-const fs = require('fs').promises;
-const path = require('path');
+const fs = require("fs").promises;
+const path = require("path");
 
 async function scanDirectory(dir, results = []) {
   try {
@@ -13,9 +13,9 @@ async function scanDirectory(dir, results = []) {
         const innerFiles = await fs.readdir(filePath);
 
         for (const innerFile of innerFiles) {
-          if (path.extname(innerFile) === '.json') {
+          if (path.extname(innerFile) === ".json") {
             const jsonFilePath = path.join(filePath, innerFile);
-            const fileContent = await fs.readFile(jsonFilePath, 'utf-8');
+            const fileContent = await fs.readFile(jsonFilePath, "utf-8");
             const jsonData = JSON.parse(fileContent);
 
             results.push({ uuid: file, ...jsonData });
@@ -35,19 +35,18 @@ async function scanDirectory(dir, results = []) {
 async function writeResultsToFile(results, outputFile) {
   try {
     const jsonString = JSON.stringify(results, null, 2);
-    await fs.writeFile(outputFile, jsonString, 'utf-8');
+    await fs.writeFile(outputFile, jsonString, "utf-8");
     console.log(`Results saved to ${outputFile}`);
   } catch (error) {
     console.error(`Error writing results to file: ${error}`);
   }
 }
 
-const args = process.argv.slice(2);
-
-// Usage example
 (async () => {
-  const results = await scanDirectory('.');
-  console.log('Results:', results);
-  await writeResultsToFile(results, 'output.json');
+  const args = process.argv.slice(2);
+  const fpath = args[0];
+  const dname = path.basename(fpath);
+  const results = await scanDirectory(fpath);
+  console.log("Results:", results);
+  await writeResultsToFile(results, `${fpath}${dname}.json`);
 })();
-

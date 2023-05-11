@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "togeojson": "^0.16.0"
+  }
+}
