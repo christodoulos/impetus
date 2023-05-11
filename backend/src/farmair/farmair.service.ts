@@ -20,4 +20,8 @@ export class FarmairService {
       return createdScan.save();
     }
   }
+
+  async getScan(name: string): Promise<FarmAIr> {
+    return await this.farmairModel.findOne({ name });
+  }
 }
