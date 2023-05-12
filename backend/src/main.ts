@@ -11,6 +11,7 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+  app.enableCors({ origin: 'http://localhost:4200', preflightContinue: true });
   const port = process.env.PORT || 3333;
   await app.listen(port);
   Logger.log(

@@ -22,6 +22,6 @@ export class FarmairService {
   }
 
   async getScan(name: string): Promise<FarmAIr> {
-    return await this.farmairModel.findOne({ name });
+    return this.farmairModel.findOne({ name }).exec();
   }
 }

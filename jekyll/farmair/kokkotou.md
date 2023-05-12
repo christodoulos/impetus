@@ -5,8 +5,19 @@ layout: kokkotou
 mapbox: true
 mapbox_case: kokkotou
 options:
-  - value: 1
+  - value: C.S. WINERY
     text: C.S. Winery
-  - value: 2
+  - value: chardonay oinodiadromes
     text: Chardonay Oinodiadromes
+layers:
+  - value: ai
+    text: Stress Boxes
+  - value: dsm
+    text: Digital Surface Map
+  - value: beta
+    text: Classification of Stress Factor
+  - value: no_pseu
+    text: Stress Bounding Boxes (no pseudo-coloring)
+  - value: comb
+    text: Leaf Chlorophyll Content
 ---

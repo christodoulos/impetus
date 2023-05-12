@@ -1,8 +1,6 @@
 ---
 layout: default
 ---
-
-<!-- prettier-ignore -->
 <div class="row">
   <div class="col-12">
     <div class="card flex-grow-1">
@@ -10,114 +8,126 @@ layout: default
         <h4 class="header-title">Kokkotou Vineyards</h4>
       </div>
       <div class="card-body">
-        {% include select_widget.html label="Select a vineyard" options=page.options %}
         <p>
-          <a href="https://farmair.io/">farmAIr</a> and Kokkotou Vineyards have kindly granted permission to use the present data.
+          <a href="https://farmair.io/">farmAIr</a> and Kokkotou Vineyards have kindly granted permission to use the
+          present data.
         </p>
-        <form id="form">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group form-check form-switch">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="cswinery_switch"
-                  name="cswinery"
-                />
-                <label class="form-check-label" for="cswinery_switch"
-                  >C.S. Winery</label
-                >
-              </div>
-              <div class="mt-3">
-                <h4>Experiments</h4>
-                {% for experiment in site.data.kokkotou.cswinery.experiments %}
-                <div>
-                  <input
-                    type="radio"
-                    id="{{ experiment }}"
-                    name="cswinery-experiment"
-                    class="form-check-input"
-                    value="{{ experiment }}"
-                    {% if forloop.first %}checked{% endif %}
-                  />
-                  <label class="form-check-label" for="{{ experiment }}"
-                    >{{ experiment }}</label
-                  >
-                </div>
-                {% endfor %}
-              </div>
-              <div class="mt-3">
-                <h4>Layers</h4>
-                {% for layer in site.data.kokkotou.cswinery.layers %}
-                <div>
-                  <input
-                    type="radio"
-                    id="{{ layer }}"
-                    name="cswinery-layer"
-                    class="form-check-input"
-                    value="{{ layer }}"
-                    {% if forloop.first %}checked{% endif %}
-                  />
-                  <label class="form-check-label" for="{{ layer }}"
-                    >{{ layer }}</label
-                  >
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group form-check form-switch">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="chardonay_switch"
-                  name="chardonay"
-                />
-                <label class="form-check-label" for="chardonay_switch"
-                  >Chardonay Oinodiadromes</label
-                >
-              </div>
-              <div class="mt-3">
-                <h4>Experiments</h4>
-                {% for experiment in site.data.kokkotou.chardonay.experiments %}
-                <div>
-                  <input
-                    type="radio"
-                    id="{{ experiment }}"
-                    name="chardonay-experiment"
-                    class="form-check-input"
-                    value="{{ experiment }}"
-                    {% if forloop.first %}checked{% endif %}
-                  />
-                  <label class="form-check-label" for="{{ experiment }}"
-                    >{{ experiment }}</label
-                  >
-                </div>
-                {% endfor %}
-              </div>
-              <div class="mt-3">
-                <h4>Layers</h4>
-                {% for layer in site.data.kokkotou.chardonay.layers %}
-                <div>
-                  <input
-                    type="radio"
-                    id="{{ layer }}"
-                    name="chardonay-layer"
-                    class="form-check-input"
-                    value="{{ layer }}"
-                    {% if forloop.first %}checked{% endif %}
-                  />
-                  <label class="form-check-label" for="{{ layer }}"
-                    >{{ layer }}</label
-                  >
-                </div>
-                {% endfor %}
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group"><label>Vineyard</label></div>
+            {% include select_widget.html label="Select a vineyard" name="vineyard" options=page.options %}
           </div>
-        </form>
+          <div class="col-md-4">
+            <div class="form-group"><label>Scan Date</label></div>
+            {% include select_widget.html label="Select a Scan Date" name="scanDate" %}
+          </div>
+          <div class="col-md-4">
+            <div class="form-group"><label>Analysis Layer</label></div>
+            {% include select_widget.html label="Select an analysis Layer" name="layer" options=page.layers %}
+          </div>
+        </div>
+        {% comment %}
+          <form id="form">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group form-check form-switch">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="cswinery_switch"
+                    name="cswinery"
+                  >
+                  <label class="form-check-label" for="cswinery_switch">C.S. Winery</label>
+                </div>
+                <div class="mt-3">
+                  <h4>Experiments</h4>
+                  {% for experiment in site.data.kokkotou.cswinery.experiments %}
+                    <div>
+                      <input
+                        type="radio"
+                        id="{{ experiment }}"
+                        name="cswinery-experiment"
+                        class="form-check-input"
+                        value="{{ experiment }}"
+                        {% if forloop.first %}
+                          checked
+                        {% endif %}
+                      >
+                      <label class="form-check-label" for="{{ experiment }}">{{ experiment }}</label>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="mt-3">
+                  <h4>Layers</h4>
+                  {% for layer in site.data.kokkotou.cswinery.layers %}
+                    <div>
+                      <input
+                        type="radio"
+                        id="{{ layer }}"
+                        name="cswinery-layer"
+                        class="form-check-input"
+                        value="{{ layer }}"
+                        {% if forloop.first %}
+                          checked
+                        {% endif %}
+                      >
+                      <label class="form-check-label" for="{{ layer }}">{{ layer }}</label>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group form-check form-switch">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="chardonay_switch"
+                    name="chardonay"
+                  >
+                  <label class="form-check-label" for="chardonay_switch">Chardonay Oinodiadromes</label>
+                </div>
+                <div class="mt-3">
+                  <h4>Experiments</h4>
+                  {% for experiment in site.data.kokkotou.chardonay.experiments %}
+                    <div>
+                      <input
+                        type="radio"
+                        id="{{ experiment }}"
+                        name="chardonay-experiment"
+                        class="form-check-input"
+                        value="{{ experiment }}"
+                        {% if forloop.first %}
+                          checked
+                        {% endif %}
+                      >
+                      <label class="form-check-label" for="{{ experiment }}">{{ experiment }}</label>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="mt-3">
+                  <h4>Layers</h4>
+                  {% for layer in site.data.kokkotou.chardonay.layers %}
+                    <div>
+                      <input
+                        type="radio"
+                        id="{{ layer }}"
+                        name="chardonay-layer"
+                        class="form-check-input"
+                        value="{{ layer }}"
+                        {% if forloop.first %}
+                          checked
+                        {% endif %}
+                      >
+                      <label class="form-check-label" for="{{ layer }}">{{ layer }}</label>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </form>
+        {% endcomment %}
       </div>
-      <!-- <div id="mapp" style="height: 800px;"></div> -->
+      <div id="mapp" style="height: 800px;"></div>
     </div>
   </div>
 </div>

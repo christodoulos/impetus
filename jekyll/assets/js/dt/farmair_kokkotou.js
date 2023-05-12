@@ -1,61 +1,58 @@
-const tilesRootURL = "https://atticadt.uwmh.eu/tiles";
+function tilesSubpath(name) {
+  switch (name) {
+    case "C.S. WINERY":
+      return "cswinery";
+    case "chardonay oinodiadromes":
+      return "chardonayoinodiadromes";
+  }
+}
 
-const vineyards = {
-  cswinery: {
-    centroid: [23.891576664952165, 38.12518436349262],
-    bbox: [
-      23.890454263637707, 38.1244416427065, 23.892439098308444,
-      38.125901760561476,
-    ],
-    coordinates: [
-      [
-        [23.89221379277396, 38.125901760561476],
-        [23.89141985888287, 38.12523500516667],
-        [23.890861959408483, 38.12499868533541],
-        [23.890861959408483, 38.124745484667045],
-        [23.890658111523067, 38.124635764104966],
-        [23.890454263637707, 38.12456824367689],
-        [23.89108726496511, 38.1244416427065],
-        [23.891913385342207, 38.12488052513291],
-        [23.892074317882617, 38.12514216532412],
-        [23.892063589046955, 38.125353164795456],
-        [23.892439098308444, 38.125749842150725],
-        [23.892235250424278, 38.12584268122049],
-        [23.89221379277396, 38.125901760561476],
-      ],
-    ],
-    tilesID: "cswinery",
-    experiments: ["D9EXPIZJE6BOI136", "DFO2PL11DZ83GPEQ", "P0MTZ3PJXDJ8EGEZ"],
-    layers: ["ai", "beta", "comb", "dsm", "no_pseu"],
-  },
-  chardonay: {
-    centroid: [23.890727700735837, 38.12361197854006],
-    bbox: [
-      23.890257555693722, 38.123188741862975, 23.89111586257772,
-      38.12409559892771,
-    ],
-    coordinates: [
-      [
-        [23.89084050175819, 38.12409559892771],
-        [23.890568691938967, 38.123855515950936],
-        [23.890450674742226, 38.12387239622882],
-        [23.890289742201816, 38.123551670286076],
-        [23.890257555693722, 38.12339130678683],
-        [23.89069743797137, 38.123188741862975],
-        [23.890804726332448, 38.12332378520787],
-        [23.890965658872886, 38.1233069048036],
-        [23.89111586257772, 38.123408187171606],
-        [23.890869099348635, 38.12351790957899],
-        [23.890783268660016, 38.12356855063422],
-        [23.890976387709713, 38.12377955465348],
-        [23.89084050175819, 38.12409559892771],
-      ],
-    ],
-    tilesID: "chardonayoinodiadromes",
-    experiments: ["3RKRVMV5TEE45O1D", "6P7LZSYJOMR9I2CX", "L3A0H0HU7UOJDHFA"],
-    layers: ["ai", "beta", "comb", "dsm", "no_pseu"],
-  },
-};
+function buildTilesURL() {
+  const tilesRootURL = "https://atticadt.uwmh.eu/tiles";
+  const vineyard = $("#vineyard").val();
+  if (vineyard) {
+    const subPath = tilesSubpath(vineyard);
+    const date = $("#scanDate").val();
+    if (date) {
+      const layer = $("#layer").val();
+      if (layer)
+        return `${tilesRootURL}/${subPath}/${date}/${layer}/{z}/{x}/{y}.png`;
+    }
+  }
+  return "";
+}
+
+function vineyardBoundary(map, name, geojson) {
+  map.addSource(`${name}-source`, { type: "geojson", data: geojson });
+  map.addLayer({
+    id: `${name}-boundary-layer`,
+    type: "line",
+    source: `${name}-source`,
+    layout: {},
+    paint: {
+      "line-color": "#000",
+      "line-width": 3,
+    },
+  });
+  map.fitBounds(geojson.properties.bbox);
+  return [`${name}-source`, `${name}-boundary-layer`];
+}
+
+function farmairAnalysisLayer(map, name, geojson, tilesURL) {
+  map.addSource(`${name}-farmair-source`, {
+    type: "raster",
+    tiles: [tilesURL],
+    bounds: geojson.properties.bbox,
+  });
+  map.addLayer({
+    id: `${name}-farmair-layer`,
+    type: "raster",
+    source: `${name}-farmair-source`,
+    minzoom: 5,
+    maxzoom: 22,
+  });
+  return [`${name}-farmair-source`, `${name}-farmair-layer`];
+}
 
 $(document).ready(() => {
   mapboxgl.accessToken = mapbox_token;
@@ -67,130 +64,118 @@ $(document).ready(() => {
   });
 
   map.on("load", () => {
-    $("#form").change(function () {
-      // remove all DT layers and sources
-      const style = map.getStyle();
-      style.layers.forEach((layer) => {
-        if (layer.id.startsWith("atticadt")) {
-          map.removeLayer(layer.id);
-        }
-      });
-      for (const sourceId in style.sources) {
-        if (sourceId.startsWith("atticadt")) {
-          map.removeSource(sourceId);
-          // style.layers.forEach((layer) => {
-          //   if (layer.source === sourceId) {
-          //     map.removeLayer(layer.id);
-          //   }
-          // });
-        }
+    let tilesURL = buildTilesURL();
+
+    $("#scanDate").prop("disabled", true);
+    $("#layer").prop("disabled", true);
+
+    let source = "";
+    let boundaryLayer = "";
+    let farmairSource = "";
+    let farmairLayer = "";
+
+    $("#vineyard").change(function () {
+      const vineyard = $(this).val();
+
+      if (farmairLayer) {
+        map.removeLayer(farmairLayer);
+        farmairLayer = "";
       }
-      // respond to form data changes
-      var formData = $(this)
-        .serializeArray()
-        .reduce(function (obj, item) {
-          obj[item.name] = item.value;
-          return obj;
-        }, {});
-      const {
-        cswinery,
-        "cswinery-experiment": cswineryExperiment,
-        "cswinery-layer": cswineryLayer,
-        chardonay,
-        "chardonay-experiment": chardonayExperiment,
-        "chardonay-layer": chardonayLayer,
-      } = formData;
-      console.log(
-        cswinery,
-        cswineryExperiment,
-        cswineryLayer,
-        chardonay,
-        chardonayExperiment,
-        chardonayLayer
-      );
-      let cswineryTilesURL = "";
-      let chardonayTilesURL = "";
-      // cswinery polygon and farmair layers ///////////////////////////////////////////////////////////////////
-      if (cswinery) {
-        map.addSource("atticadt-cswinery-source", {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            geometry: {
-              type: "Polygon",
-              coordinates: vineyards.cswinery.coordinates,
-            },
-          },
-        });
-        map.addLayer({
-          id: "atticadt-cswinery-outline-layer",
-          type: "line",
-          source: "atticadt-cswinery-source",
-          layout: {},
-          paint: {
-            "line-color": "#000",
-            "line-width": 3,
-          },
-        });
-        if (cswineryExperiment && cswineryLayer) {
-          cswineryTilesURL = `${tilesRootURL}/cswinery/${cswineryExperiment}/${cswineryLayer}/{z}/{x}/{y}.png`;
-          map.addSource("atticadt-cswinery-farmair-source", {
-            type: "raster",
-            tiles: [cswineryTilesURL],
-            bounds: vineyards.cswinery.bbox,
-          });
-          map.addLayer({
-            id: "atticadt-cswinery-farmair-layer",
-            type: "raster",
-            source: "atticadt-cswinery-farmair-source",
-            minzoom: 5,
-            maxzoom: 22,
-          });
-        }
+      if (boundaryLayer) {
+        map.removeLayer(boundaryLayer);
+        boundaryLayer = "";
       }
-      // chardonay polygon and farmair layers ///////////////////////////////////////////////////////////////////
-      if (chardonay) {
-        map.addSource("atticadt-chardonay-source", {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            geometry: {
-              type: "Polygon",
-              coordinates: vineyards.chardonay.coordinates,
-            },
-          },
-        });
-        map.addLayer({
-          id: "atticadt-chardonay-outline-layer",
-          type: "line",
-          source: "atticadt-chardonay-source",
-          layout: {},
-          paint: {
-            "line-color": "#000",
-            "line-width": 3,
-          },
-        });
-        if (chardonayExperiment && chardonayLayer) {
-          chardonayTilesURL = `${tilesRootURL}/chardonayoinodiadromes/${chardonayExperiment}/${chardonayLayer}/{z}/{x}/{y}.png`;
-          map.addSource("atticadt-chardonay-farmair-source", {
-            type: "raster",
-            tiles: [chardonayTilesURL],
-            bounds: vineyards.chardonay.bbox,
+      if (farmairSource) {
+        map.removeSource(farmairSource);
+        farmairSource = "";
+      }
+      if (source) {
+        map.removeSource(source);
+        source = "";
+      }
+
+      if (vineyard) {
+        $("#scanDate").find("option:first").prop("selected", true);
+        $("#layer").find("option:first").prop("selected", true);
+
+        fetch(`http://localhost:3333/api/farmair/vineyard/${vineyard}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const { name, geojson, scans } = data;
+            const { bbox, centroid } = geojson.properties;
+            console.log(bbox, centroid);
+
+            [source, boundaryLayer] = vineyardBoundary(map, name, geojson);
+
+            const dates = scans
+              .map((obj) => {
+                return { uuid: obj.uuid, date: obj.weather_data[0].dt };
+              })
+              .sort((a, b) => a.date - b.date)
+              .map((obj) => {
+                const date = new Date(obj.date * 1000);
+                return {
+                  uuid: obj.uuid,
+                  date: date.toLocaleDateString("en-US", {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  }),
+                };
+              });
+
+            $("#scanDate").prop("disabled", false);
+            $("#layer").prop("disabled", false);
+
+            const datesSelect = $("#scanDate");
+            datesSelect.find("option:not(:first)").remove();
+            dates.forEach((obj) => {
+              const optionElement = $("<option>")
+                .attr("value", obj.uuid)
+                .text(obj.date);
+              datesSelect.append(optionElement);
+            });
+
+            $("#scanDate").change(function () {
+              if (farmairLayer) map.removeLayer(farmairLayer);
+              if (farmairSource) map.removeSource(farmairSource);
+              farmairSource = "";
+              farmairLayer = "";
+              tilesURL = buildTilesURL();
+              if (tilesURL) {
+                [farmairSource, farmairLayer] = farmairAnalysisLayer(
+                  map,
+                  name,
+                  geojson,
+                  tilesURL
+                );
+              }
+            });
+
+            $("#layer").change(function () {
+              if (farmairLayer) map.removeLayer(farmairLayer);
+              if (farmairSource) map.removeSource(farmairSource);
+              farmairSource = "";
+              farmairLayer = "";
+              tilesURL = buildTilesURL();
+              if (tilesURL) {
+                [farmairSource, farmairLayer] = farmairAnalysisLayer(
+                  map,
+                  name,
+                  geojson,
+                  tilesURL
+                );
+              }
+            });
           });
-          map.addLayer({
-            id: "atticadt-chardonay-farmair-layer",
-            type: "raster",
-            source: "atticadt-chardonay-farmair-source",
-            minzoom: 5,
-            maxzoom: 22,
-          });
-        }
+      } else {
+        $("#scanDate").prop("disabled", true);
+        $("#layer").find("option:first").prop("selected", true);
+        $("#layer").prop("disabled", true);
+        $("#scanDate").find("option:not(:first)").remove(); // Clear all datesSelect options except the first label
       }
     });
-    setTimeout(() => {
-      $("#cswinery_switch").prop("checked", true).trigger("change");
-      $("#chardonay_switch").prop("checked", true).trigger("change");
-    }, 500);
   });
 
   map.flyTo({
