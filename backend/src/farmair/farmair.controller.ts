@@ -17,4 +17,10 @@ export class FarmairController {
     console.log(vineyard);
     return vineyard;
   }
+
+  @Get('/scandata/:uuid')
+  async farmairGetScanData(@Param('uuid') uuid: string) {
+    const scanData = await this.service.findScanByUuid(uuid);
+    return scanData;
+  }
 }

@@ -3,6 +3,7 @@ title: farmAIr
 title_url: /farmair
 layout: kokkotou
 mapbox: true
+apex: true
 mapbox_case: kokkotou
 options:
   - value: C.S. WINERY

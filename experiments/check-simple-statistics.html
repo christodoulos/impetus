@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="temp"></div>
+    <div id="pressure"></div>
+    <div id="humidity"></div>
+    <div id="wind_speed"></div>
+    <div id="clouds"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/simple-statistics@7.8.2/dist/simple-statistics.min.js"></script>
+    <script src="data.js"></script>
+    <script>
+      function stats(data) {
+        console.log(data);
+        const yValues = data.map((point) => point.y);
+        return [
+          ss.min(yValues).toFixed(1),
+          ss.mean(yValues).toFixed(1),
+          ss.max(yValues).toFixed(1),
+        ];
+      }
+
+      console.log(weather);
+
+      weather = _.orderBy(weather, ["td"], ["asc"]);
+
+      const attrData = _.map(weather, (item) => {
+        return {
+          x: item.dt * 1000,
+          temp: item.main.temp,
+          pressure: item.main.pressure,
+          humidity: item.main.humidity,
+          wind_speed: item.wind.speed,
+          clouds: item.clouds.all,
+        };
+      });
+      console.log(attrData);
+
+      const series = [
+        {
+          id: "temp",
+          name: "Temperature",
+          symbol: "°C",
+          data: _.map(attrData, (item) => ({
+            x: item.x,
+            y: item.temp - 273.2,
+          })),
+        },
+        {
+          id: "pressure",
+          name: "Pressure",
+          symbol: "hPa",
+          data: _.map(attrData, (item) => ({ x: item.x, y: item.pressure })),
+        },
+        {
+          id: "humidity",
+          name: "Humidity",
+          symbol: "%",
+          data: _.map(attrData, (item) => ({ x: item.x, y: item.humidity })),
+        },
+        {
+          id: "wind_speed",
+          name: "Wind Speed",
+          symbol: "m/s",
+          data: _.map(attrData, (item) => ({ x: item.x, y: item.wind_speed })),
+        },
+        {
+          id: "clouds",
+          name: "Clouds",
+          symbol: "%",
+          data: _.map(attrData, (item) => ({ x: item.x, y: item.clouds })),
+        },
+      ];
+
+      const chartOptions = (seriesData) => {
+        const [min, mean, max] = stats(seriesData.data);
+        return {
+          chart: {
+            id: seriesData.id,
+            fontFamily: "Ubuntu Mono",
+            type: "line",
+            height: 350,
+            zoom: {
+              enabled: false,
+            },
+          },
+          title: { text: seriesData.name, align: "left" },
+          subtitle: {
+            text: `min: ${min}${seriesData.symbol}, mean: ${mean}${seriesData.symbol}, max: ${max}${seriesData.symbol}`,
+            style: {
+              fontSize: "10px",
+            },
+          },
+          series: [seriesData],
+          xaxis: {
+            type: "datetime",
+            labels: {
+              formatter: function (value) {
+                const date = new Date(value);
+                const year = date.getFullYear();
+                const month = date.toLocaleString("default", {
+                  month: "short",
+                });
+                const day = date.getDate();
+                return `${day} ${month} ${year}`;
+              },
+            },
+          },
+          yaxis: {
+            labels: {
+              formatter: function (value) {
+                return value.toFixed(1) + seriesData.symbol;
+              },
+            },
+          },
+        };
+      };
+
+      const optionsArray = series.map((seriesData) => chartOptions(seriesData));
+
+      $(document).ready(function () {
+        optionsArray.forEach((options) => {
+          const chart = new ApexCharts(
+            document.querySelector(`#${options.chart.id}`),
+            options
+          );
+          chart.render();
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { FarmAIr, FarmAIrDocument } from './farmair.schema';
+import { FarmAIr, FarmAIrDocument, Scan } from './farmair.schema';
 import { Model } from 'mongoose';
 import { FarmAIrDTO } from './farmair.dto';
 
@@ -23,5 +23,12 @@ export class FarmairService {
 
   async getScan(name: string): Promise<FarmAIr> {
     return this.farmairModel.findOne({ name }).exec();
+  }
+
+  async findScanByUuid(uuid: string): Promise<Scan> {
+    const document = await this.farmairModel
+      .findOne({ 'scans.uuid': uuid })
+      .exec();
+    return document.scans.find((scan) => scan.uuid === uuid);
   }
 }

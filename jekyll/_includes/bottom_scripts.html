@@ -44,6 +44,7 @@
 {% if page.apex %}
   <script src="{{ "/assets/js/apexcharts.min.js" | relative_url }}"></script>
   <script src="{{ "/assets/js/lodash.min.js" | relative_url }}"></script>
+  <script src="https://unpkg.com/simple-statistics@7.8.2/dist/simple-statistics.min.js"></script>
   {% case page.dashboard_case %}
     {% when 'apn' %}
       <script src="{{ "/assets/js/dt/apn.live.charts.js" | relative_url }}"></script>
