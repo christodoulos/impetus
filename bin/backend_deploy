@@ -1,0 +1,7 @@
+#!/bin/bash
+cd $HOME/Workspace/impetus/backend
+npm run build
+rsync -avz dist/* atticadt@atticadt:/home/atticadt/v2_backend/
+rsync package.json atticadt@atticadt:/home/atticadt/v2_backend/package.json
+ssh atticadt@atticadt 'source ~/.nvm/nvm.sh && cd v2_backend && npm i'
+ssh atticadt@atticadt 'source ~/.nvm/nvm.sh && pm2 restart /home/atticadt/v2_backend/main.js'

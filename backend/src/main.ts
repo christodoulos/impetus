@@ -9,7 +9,7 @@ async function bootstrap() {
   app.use(bodyParser.json({ limit: '50mb' }));
   // Set the limit for URL-encoded payloads
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-  const globalPrefix = 'api';
+  const globalPrefix = 'v2/api';
   app.setGlobalPrefix(globalPrefix);
   app.enableCors({ origin: 'http://localhost:4200', preflightContinue: true });
   const port = process.env.PORT || 3334;
