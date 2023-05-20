@@ -1,2 +1,2 @@
 #!/bin/bash
-autossh -N -M 20000 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -L 27027:localhost:27017 atticadt@atticadt &
+autossh -N -M 20000 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -L 27017:localhost:27017 atticadt@atticadt &

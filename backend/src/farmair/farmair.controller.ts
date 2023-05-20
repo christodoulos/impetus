@@ -14,7 +14,7 @@ export class FarmairController {
   @Get('/vineyard/:name')
   async farmairGetScan(@Param('name') name: string) {
     const vineyard = await this.service.getScan(name);
-    console.log(vineyard);
+    // console.log(vineyard);
     return vineyard;
   }
 

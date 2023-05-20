@@ -1,6 +1,15 @@
 <script>
   window.baseUrl = '{{ site.baseurl }}';
 </script>
+{% if jekyll.environment == 'production' %}
+  <script>
+    const API_URL = 'https://atticadt.uwmh.eu/v2/api';
+  </script>
+{% else %}
+  <script>
+    const API_URL = 'http://localhost:3334/api';
+  </script>
+{% endif %}
 <script src="{{ "/assets/js/vendor.min.js" | relative_url }}"></script>
 <script src="{{ "/assets/js/moment.min.js" | relative_url }}"></script>
 <!-- <script src="{{ "/assets/vendor/daterangepicker/daterangepicker.js" | relative_url }}"></script> -->

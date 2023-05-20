@@ -215,7 +215,8 @@ $(document).ready(() => {
         $("#scanDate").find("option:first").prop("selected", true);
         $("#layer").find("option:first").prop("selected", true);
 
-        fetch(`http://localhost:3333/api/farmair/vineyard/${vineyard}`)
+        fetch(`${API_URL}/farmair/vineyard/${vineyard}`)
+          // fetch(`https://atticadt.uwmh.eu/v2/api/farmair/vineyard/${vineyard}`)
           .then((response) => response.json())
           .then((data) => {
             const { name, geojson, scans } = data;
