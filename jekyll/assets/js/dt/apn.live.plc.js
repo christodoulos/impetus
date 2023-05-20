@@ -47,7 +47,7 @@ $(document).ready(function () {
           targets: 0,
           render: function (data, type, row) {
             if (type === "display" || type === "filter") {
-              return moment(data).format("DD/MM/YYYY HH:mm");
+              return moment.utc(data).format("DD/MM/YYYY HH:mm");
             }
             return data;
           },
