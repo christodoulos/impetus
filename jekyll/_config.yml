@@ -1,5 +1,5 @@
-url: "https://atticadt.uwmh.eu"
-baseurl: "/v2"
+url: "https://beta.atticadt.uwmh.eu"
+baseurl: "/"
 title: "Impetus Attica Digital Twins"
 
 compress_html:
