@@ -1,9 +1,9 @@
 $(document).ready(() => {
   $.ajax({
-    url: "https://atticadt.uwmh.eu/api/nursery/plc",
+    url: `${API_URL}/apn-nursery/metrics/1008`,
     method: "GET",
-    success: (allData) => {
-      const data = _.orderBy(allData, ["ts"], ["asc"]).slice(-1008);
+    success: (data) => {
+      // const data = _.orderBy(allData, ["ts"], ["asc"]).slice(-1008);
       console.log(data);
       const attrData = _.map(data, (item) => {
         return {

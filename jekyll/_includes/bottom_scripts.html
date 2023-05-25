@@ -7,7 +7,8 @@
   </script>
 {% else %}
   <script>
-    const API_URL = 'http://localhost:3334/v2/api';
+    {% comment %} const API_URL = 'http://localhost:3334/v2/api'; {% endcomment %}
+    const API_URL = 'http://localhost:3335/api';
   </script>
 {% endif %}
 <script src="{{ "/assets/js/vendor.min.js" | relative_url }}"></script>

@@ -11,13 +11,25 @@ datatable_case: apn
 Our facility pushes metrics automatically every ten minutes. Hover over the `#x` title to see the metric description or
 see the legend.
 
-<button
-class="btn btn-primary"
-type="button"
-data-bs-toggle="offcanvas"
-data-bs-target="#offcanvasRight"
-aria-controls="offcanvasRight"
-id="weather_button"> Table Legend </button>
+<div class="d-flex justify-content-between mb-2">
+  <div class="d-flex gap-2">
+      <button class="btn btn-primary text-nowrap" type="button" onClick="setNum(144)">Last Day</button>
+      <button class="btn btn-primary text-nowrap" type="button" onClick="setNum(1008)">Last Week</button>
+      <button class="btn btn-primary text-nowrap" type="button" onClick="setNum(4032)">Last Month</button>
+      <button class="btn btn-primary text-nowrap" type="button" onClick="setNum(0)">Everything</button>
+  </div>
+  <div>
+    <button
+      class="btn btn-primary text-nowrap"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasRight"
+      aria-controls="offcanvasRight"
+      id="offcanvas_button"> 
+        Table Legend 
+    </button>
+  </div>
+</div>
 
 <table id="apn-live-plc" class="table dt-responsive nowrap w-100">
   <thead>
