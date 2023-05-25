@@ -1,12 +1,16 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ApnNurseryService } from './apn-nursery.service';
 import { ApnPLCDTO } from './apn-nursery.dto';
 
+@ApiTags('Athens Plant Nursery')
 @Controller('apn-nursery')
 export class ApnNurseryController {
   constructor(private readonly service: ApnNurseryService) {}
 
   @Get('metrics/:limit')
+  @ApiOperation({ summary: 'Get the last {limit} (0=all) PLC metrics' })
+  @ApiResponse({ status: 200, description: 'Success' })
   async apnNurseryGetMetrics(@Param('limit') limit: number) {
     const metrics = await this.service.getPLCMetrics(limit);
     return metrics;

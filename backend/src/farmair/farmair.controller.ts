@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { FarmairService } from './farmair.service';
 import { FarmAIrDTO } from './farmair.dto';
 
+@ApiTags('farmAIr')
 @Controller('farmair')
 export class FarmairController {
   constructor(private readonly service: FarmairService) {}
