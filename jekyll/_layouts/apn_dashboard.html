@@ -2,6 +2,13 @@
 layout: default
 ---
 
+<div class="row">
+  <div class="col-3">
+    {% include select_widget.html label="Select a PLC Metric" name="metric"
+    options=page.metrics %}
+  </div>
+</div>
+
 <!-- prettier-ignore -->
 <div class="row">
   {% assign sorted_cards = site.dashboards | where: 'group', 'plant_nursery_dashboard' | sort: 'order' %} 
