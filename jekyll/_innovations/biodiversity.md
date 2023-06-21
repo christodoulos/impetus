@@ -1,5 +1,5 @@
 ---
-title: Deforestation Prevention
+title: Reforestration
 link: /
 icon: uil-trees
 color: bg-warning

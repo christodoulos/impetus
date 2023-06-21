@@ -7,13 +7,13 @@ apex: true
 dashboard_case: apn
 dt_case: apn
 links:
-  - url: futwrio/#about
+  - url: athens-plant-nursery/#about
     link: About the Digital Twin Pilot
-  - url: futwrio/#a-short-video-tour
+  - url: athens-plant-nursery/#a-short-video-tour
     link: A short video tour
-  - url: futwrio/#live-plc-metrics
+  - url: athens-plant-nursery/#live-plc-metrics
     link: Live PLC metrics
-  - url: futwrio/#live-plc-charts
+  - url: athens-plant-nursery/#live-plc-charts
     link: Live PLC charts
 metrics:
   - value: metrics/temperature-membrane-tank-5/
@@ -53,6 +53,8 @@ To break the SMF information barriers and make the facility capable of integrati
 The AUDT will push the latest SMF’s “water quality entity” to all connected subscribers. To that end, we employ the “Smart Water” data models related to the water management domain of the Smart Data Models Initiative of FIWARE et al. Several data models are available, including water consumption, quality, and wastewater treatment. The current SMF setup involves the Athens Water Supply and Sewerage Company (EYDAP SA) for collecting and analyzing the produced reclaimed water quality. To enable the AUDT with the water quality context of the SMF, we have to provide EYDAP with a suitable interface for entering their analysis outcomes. The interface will respect the “Smart Water” quality specification and perhaps extend it if such an extension seems appropriate.
 
 Day-to-day SMF operations and monitoring, like the status of the bioreactor unit or the UV disinfection unit, are immediately available through the SMF’s programmable logic controller (PLC). The SMF uses a Unitronics PLC to provide its components’ real-time status. The PLC produces status information that follows Unitronic’s specifications and is stored directly in the PLC. We could say that every similar PLC is an inherently disconnected data source. To enable the AUDT with the specific PLC or any similar PLC setup context and try to be as less intrusive as possible, we have to establish data transfers from any PLC to the AUDT’s facility that transforms the PLC data to relevant context entity data. The “Smart Water” data models include ready-to-use models like the “waste water tank” data model. Once again, we can extend the available models or introduce new ones.
+
+<img src="/assets/images/plc.png" class="img-fluid">
 
 The above procedures are general and apply to any similar sewer mining facility. By making the AUDT aware of the SMF and similar entities, we can proceed further with the available knowledge and insights that the AUDT provides.
 

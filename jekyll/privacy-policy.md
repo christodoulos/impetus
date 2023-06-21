@@ -1,5 +1,5 @@
 ---
-layout: simple_card
+layout: default
 title: Privacy Policy
 ---
 
