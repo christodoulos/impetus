@@ -1,6 +1,2 @@
-<select name="{{ include.name }}" id="{{ include.name }}" class="form-select">
-  <option value="" selected>{{ include.label }}</option>
-  {% for option in include.options %}
-  <option value="{{ option.value }}">{{ option.text }}</option>
-  {% endfor %}
-</select>
+<!-- prettier-ignore -->
+<select name="{{ include.name }}" id="{{ include.name }}" class="form-select"> <option value="" selected>{{ include.label }}</option> {% for option in include.options %} <option value="{{ option.value }}">{{ option.text }}</option> {% endfor %} </select>

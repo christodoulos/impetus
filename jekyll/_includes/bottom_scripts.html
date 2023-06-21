@@ -13,9 +13,9 @@
 {% endif %}
 <script src="{{ "/assets/js/vendor.min.js" | relative_url }}"></script>
 <script src="{{ "/assets/js/moment.min.js" | relative_url }}"></script>
-<!-- <script src="{{ "/assets/vendor/daterangepicker/daterangepicker.js" | relative_url }}"></script> -->
 <script src="{{ "/assets/js/app.min.js" | relative_url }}"></script>
 {% if page.mapbox %}
+  <!-- <script src="{{ "/assets/js/interpolateHeatmapLayer.js" | relative_url}}"></script> -->
   <script src="{{ "/assets/js/mapbox-gl.js" | relative_url }}"></script>
   <script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
   <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -48,20 +48,29 @@
   <script src="{{ "/assets/js/pdfmake.min.js" | relative_url }}"></script>
   <script src="{{ "/assets/js/vfs_fonts.js" | relative_url }}"></script>
   <script src="{{ "/assets/js/buttons.html5.min.js" | relative_url }}"></script>
-  {% case page.datatable_case %}
-    {% when 'apn' %}
-      <script src="{{ "/assets/js/dt/apn.live.plc.js" | relative_url }}"></script>
-  {% endcase %}
+  <!--
+    {% case page.datatable_case %}
+      {% when 'apn' %}
+        <script src="{{ "/assets/js/dt/apn.live.plc.js" | relative_url }}"></script>
+    {% endcase %}
+  -->
 {% endif %}
 {% if page.apex %}
   <script src="{{ "/assets/js/apexcharts.min.js" | relative_url }}"></script>
   <script src="{{ "/assets/js/lodash.min.js" | relative_url }}"></script>
   <script src="https://unpkg.com/simple-statistics@7.8.2/dist/simple-statistics.min.js"></script>
-  {% case page.dashboard_case %}
-    {% when 'apn' %}
-      <script src="{{ "/assets/js/dt/apn.live.charts.js" | relative_url }}"></script>
-  {% endcase %}
+  <!--
+    {% case page.dashboard_case %}
+      {% when 'apn' %}
+        <script src="{{ "/assets/js/dt/apn.live.charts.js" | relative_url }}"></script>
+    {% endcase %}
+  -->
 {% endif %}
 {% if page.apn_weather %}
   <script src="{{ "/assets/js/dt/apn.live.weather.js" | relative_url }}"></script>
 {% endif %}
+<!-- DT cases -->
+{% case page.dt_case %}
+  {% when 'apn' %}
+    <script src="{{ "/assets/js/dt/apn.js" | relative_url }}"></script>
+{% endcase %}

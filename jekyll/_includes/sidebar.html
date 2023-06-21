@@ -3,16 +3,16 @@
   <!-- Brand Logo Light -->
   <a href="{{ "/index.html" | relative_url }}" class="logo logo-light">
     <span class="logo-lg mt-2 mb-2">
-      <img src="{{ "/assets/images/uwmh-white-logo.png" | relative_url }}" alt="logo" />
+      <img src="{{ "/assets/images/uwmh-white-logo.png" | relative_url }}" alt="logo">
     </span>
     <span class="logo-sm">
-      <img src="{{ "/assets/images/uwmh-white-logo-sm.png" | relative_url }}" alt="small logo" />
+      <img src="{{ "/assets/images/uwmh-white-logo-sm.png" | relative_url }}" alt="small logo">
     </span>
   </a>
 
   <!-- Sidebar -left -->
   <div class="h-100" id="leftside-menu-container" data-simplebar>
-    <!--- Sidemenu -->
+    <!-- - Sidemenu -->
     <ul class="side-nav">
       <li class="side-nav-item">
         <a aria-expanded="false" class="side-nav-link" href="{{ "/" | relative_url }}"
@@ -43,7 +43,7 @@
         </div>
       </li>
 
-      <li class="side-nav-title">Innovations</li>
+      <li class="side-nav-title">Innovations Inventory</li>
 
       <li class="side-nav-item">
         <a
@@ -65,9 +65,7 @@
               <a href="{{ "/athens-plant-nursery/about" | relative_url }}">More info</a>
             </li>
             <li>
-              <a href="{{ "/athens-plant-nursery/live-plc-metrics.html" | relative_url }}"
-                >Live PLC metrics</a
-              >
+              <a href="{{ "/athens-plant-nursery/live-plc-metrics.html" | relative_url }}">Live PLC metrics</a>
             </li>
             <li>
               <a href="{{ "/athens-plant-nursery/charts.html" | relative_url }}">Live PLC Charts</a>
@@ -101,35 +99,19 @@
         </div>
       </li>
 
-      <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#meteo_contours"
-          aria-expanded="false"
-          aria-controls="meteo_contours"
-          class="side-nav-link"
-        >
-          <i class="ri-earth-line"></i>
-          <span> Meteorological Contours </span>
-        </a>
 
-        <div class="collapse" id="meteo_contours">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="{{ "/meteorological_contours" | relative_url }}">About</a>
-            </li>
-            <li>
-              <a href="{{ "/meteorological_contours/contours" | relative_url }}">Contours</a>
-            </li>
-            
-          
-          </ul>
-        </div>
+      <li class="side-nav-title">Regional Services</li>
+
+      <li class="side-nav-item">
+        <a href="{{ "/meteorological/heatmaps" | relative_url }}" class="side-nav-link">
+          <i class="uil-layer-group"></i>
+          <span> Meteorological Heatmaps </span>
+        </a>
       </li>
 
       <!-- End Sidemenu -->
     </ul>
-    <!--- End Sidemenu -->
+    <!-- - End Sidemenu -->
 
     <div class="clearfix"></div>
   </div>
