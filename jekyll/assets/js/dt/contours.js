@@ -24,18 +24,54 @@ $(document).ready(() => {
       fetch(`${API_URL}/geojson/${metric}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          console.log("GEOJSON:", data);
 
           $("#timestamp").text(
             moment(data.properties.TimeOfObservation).format("MMMM D YYYY H:mm")
           );
 
-          // const layer = interpolateHeatmapLayer.create({ points: data });
-          // console.log(layer);
+          const points = [];
+
+          for (let index = 0; index < data.features.length; index++) {
+            const element = data.features[index];
+            const point = {
+              lon: element.geometry.coordinates[0],
+              lat: element.geometry.coordinates[1],
+              val: element.properties[metric],
+            };
+            points.push(point);
+          }
+
+          console.log("POINTS:", points);
+
+          const minValue = points.reduce(
+            (min, current) => (current.val < min ? current.val : min),
+            points[0].val
+          );
+          const maxValue = points.reduce(
+            (max, current) => (current.val > max ? current.val : max),
+            points[0].val
+          );
+          console.log("MIN MAX:", minValue, maxValue);
+
+          const roi = [
+            [24.15781263864656, 37.61135274561016],
+            [24.15781263864656, 38.35802345661327],
+            [23.07083065217489, 38.35802345661327],
+            [23.07083065217489, 37.61135274561016],
+            [24.15781263864656, 37.61135274561016],
+          ];
+
+          const layer = interpolateHeatmapLayer.create({
+            layerId: "heatmap",
+            opacity: 0.8,
+            points,
+            roi,
+          });
 
           map.addSource("data", {
             type: "geojson",
-            data: data, // Your GeoJSON data
+            data: data,
           });
           map.addLayer({
             id: "labels",
@@ -46,27 +82,8 @@ $(document).ready(() => {
               "text-size": 12,
             },
           });
-          map.addLayer(
-            {
-              id: "heatmap",
-              type: "heatmap",
-              source: "data",
-              paint: {
-                // "heatmap-weight": ["get", metric],
-                "heatmap-radius": [
-                  "interpolate",
-                  ["exponential", 2],
-                  ["zoom"],
-                  0,
-                  1,
-                  9,
-                  100,
-                ],
-              },
-            },
-            "labels"
-          );
-          // map.addLayer(layer, "labels");
+
+          map.addLayer(layer, "labels");
 
           first = false;
         });
