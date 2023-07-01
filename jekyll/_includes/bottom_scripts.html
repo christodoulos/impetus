@@ -13,6 +13,7 @@
 {% endif %}
 <script src="{{ "/assets/js/vendor.min.js" | relative_url }}"></script>
 <script src="{{ "/assets/js/moment.min.js" | relative_url }}"></script>
+<script src="{{ "/assets/js/lodash.min.js" | relative_url }}"></script>
 <script src="{{ "/assets/js/app.min.js" | relative_url }}"></script>
 {% if page.mapbox %}
   <script src="{{ "/assets/js/interpolateHeatmapLayer.js" | relative_url}}"></script>
@@ -34,7 +35,7 @@
     {% when 'kokkotou' %}
       <script src="{{ "/assets/js/dt/farmair_kokkotou.js" | relative_url }}"></script>
     {% when 'contours' %}
-      <script src="{{ "/assets/js/dt/contours.js" | relative_url }}"></script>
+      <script src="{{ "/assets/js/dt/heatmaps.js" | relative_url }}"></script>
   {% endcase %}
 {% endif %}
 {% if page.datatable %}
@@ -57,7 +58,6 @@
 {% endif %}
 {% if page.apex %}
   <script src="{{ "/assets/js/apexcharts.min.js" | relative_url }}"></script>
-  <script src="{{ "/assets/js/lodash.min.js" | relative_url }}"></script>
   <script src="https://unpkg.com/simple-statistics@7.8.2/dist/simple-statistics.min.js"></script>
   <!--
     {% case page.dashboard_case %}

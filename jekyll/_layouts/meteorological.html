@@ -4,4 +4,22 @@ layout: default
 
 {{ content }}
 
-<div id="mapp" style="height: 800px; margin-top: 1em"></div>
+<div id="mapp" style="height: 600px; margin-top: 1em"></div>
+<div id="legend" style="margin-top: 1em; display: none">
+  <strong>Legend (unit: <span id="legend-unit"></span>)</strong>
+  <div class="row">
+    <div class="col-1 text-small" id="min"></div>
+    <div
+      class="col-10"
+      style="
+        background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 255, 0.8),
+          rgba(0, 128, 0, 0.8),
+          rgba(255, 0, 0, 0.8)
+        );
+      "
+    ></div>
+    <div class="col-1" id="max"></div>
+  </div>
+</div>
