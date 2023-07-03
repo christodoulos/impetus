@@ -4,7 +4,8 @@ export JEKYLL_ENV=production
 rm -rf _site && bundle exec jekyll build --config _config.yml,_config.secrets.yml
 if [ $? -eq 0 ]
 then
-    rsync -avz --delete _site/* beta@atticadt:/home/beta/www
+    #rsync -avz --delete _site/* beta@atticadt:/home/beta/www
+    rsync -avz --delete _site/* atticadt@atticadt:atticadt
 else
     echo "Didn't deploy site for there are build errors" >$2
 fi

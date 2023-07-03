@@ -7,13 +7,13 @@ apex: true
 dashboard_case: apn
 dt_case: apn
 links:
-  - url: athens-plant-nursery/#about
+  - url: athens-plant-nursery.html#about
     link: About the Digital Twin Pilot
-  - url: athens-plant-nursery/#a-short-video-tour
+  - url: athens-plant-nursery.html#a-short-video-tour
     link: A short video tour
-  - url: athens-plant-nursery/#live-plc-metrics
+  - url: athens-plant-nursery.html#live-plc-metrics
     link: Live PLC metrics
-  - url: athens-plant-nursery/#live-plc-charts
+  - url: athens-plant-nursery.html#live-plc-charts
     link: Live PLC charts
 metrics:
   - value: metrics/temperature-membrane-tank-5/
